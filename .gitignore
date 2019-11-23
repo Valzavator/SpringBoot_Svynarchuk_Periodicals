@@ -1,3 +1,11 @@
+HELP.md
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+.mvn
+mvnw
+mvnw.cmd
+
 # Compiled class file
 *.class
 
@@ -37,3 +45,4 @@ release.properties
 *.iws
 out/
 .idea_modules/
+/HELP.md

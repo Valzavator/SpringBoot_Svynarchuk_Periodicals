@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <!--        <Property name="serverLogsFilepath">$${sys:catalina.base}/logs/periodicals</Property>-->
+        <Property name="serverLogsFilepath">$${log4j:configParentLocation}/logs/</Property>
+        <Property name="pattern">%d{yyyy-MM-dd HH:mm:ss.SSS} - %-5p: [%t] %c{}:%L - %m%n</Property>
+    </Properties>
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}"/>
+        </Console>
+        <RollingFile
+                name="SERVER_LOGS_FILE"
+                fileName="${serverLogsFilepath}/periodicals.log"
+                filePattern="${serverLogsFilepath}/periodicals.%d{yyyy-MM-dd}-%i.log.gz"
+                ignoreExceptions="false">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${pattern}"/>
+            <Policies>
+                <OnStartupTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="100 MB"/>
+                <TimeBasedTriggeringPolicy/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="INFO">
+            <AppenderRef ref="SERVER_LOGS_FILE"/>
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+        <Logger name="com.gmail.maxsvynarchuk" level="DEBUG" additivity="false">
+            <AppenderRef ref="SERVER_LOGS_FILE"/>
+            <AppenderRef ref="STDOUT"/>
+        </Logger>
+    </Loggers>
+</Configuration>
