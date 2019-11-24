@@ -1,12 +1,9 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.springdata;
 
 import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalIssueDao;
-import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
-import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.persistence.repository.PeriodicalIssueRepository;
-import com.gmail.maxsvynarchuk.persistence.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 

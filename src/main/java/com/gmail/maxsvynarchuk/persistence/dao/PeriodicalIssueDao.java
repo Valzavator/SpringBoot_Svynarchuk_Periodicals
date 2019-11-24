@@ -4,7 +4,6 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface PeriodicalIssueDao extends GenericDao<PeriodicalIssue, Long> {
 

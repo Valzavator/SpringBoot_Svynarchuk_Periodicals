@@ -25,16 +25,6 @@ public interface GenericDao<T, ID> {
      */
     List<T> findAll();
 
-    //TODO -delete
-//    /**
-//     * Retrieves all object data from database.
-//     *
-//     * @return List of objects which represent one row in database.
-//     * @param skip skip
-//     * @param limit limit
-//     */
-//    List<T> findAll(long skip, long limit);
-
     /**
      * Insert object to a database.
      *
@@ -56,21 +46,4 @@ public interface GenericDao<T, ID> {
      * @param obj user to delete.
      */
     void delete(T obj);
-    //TODO -delete
-//    /**
-//     * Check object's existing in database.
-//     *
-//     * @param id identifier of the object.
-//     * @return {@code true} if exists else {@code false}
-//     */
-//    default boolean exist(ID id) {
-//        return findOne(id).isPresent();
-//    }
-//TODO -delete
-//    /**
-//     * Retrieves count of objects from database.
-//     *
-//     * @return count of objects.
-//     */
-//    long getCount();
 }

@@ -4,6 +4,8 @@ import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.PageRequest;
@@ -33,7 +35,7 @@ public class AdminController {
     private final SubscriptionDao subscriptionDao;
 
     @GetMapping("/")
-    public void adminPage() {
+    public String adminPage() {
 //        log.error(userDao.findAll().toString());
 //        log.error(roleDao.findAll().toString());
 //        Payment p = Payment.builder()
@@ -51,6 +53,14 @@ public class AdminController {
 //                User.builder().userId(2L).build(),
 //                false,
 //                PageRequest.of(0, 10)).getContent().toString());
-//        return "/index";
+        log.error("\n\n{}\n\n", Views.HOME_VIEW);
+        return Views.HOME_VIEW;
+    }
+
+    @GetMapping("/signin")
+    public String signInPage() {
+
+        log.error("\n\n{}\n\n", Views.SIGN_IN_VIEW);
+        return Views.SIGN_IN_VIEW;
     }
 }
