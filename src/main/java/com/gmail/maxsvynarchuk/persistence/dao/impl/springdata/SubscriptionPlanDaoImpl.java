@@ -1,8 +1,8 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.springdata;
 
-import com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao;
-import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
-import com.gmail.maxsvynarchuk.persistence.repository.FrequencyRepository;
+import com.gmail.maxsvynarchuk.persistence.dao.SubscriptionPlanDao;
+import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
+import com.gmail.maxsvynarchuk.persistence.repository.SubscriptionPlanRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,32 +11,31 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class SubscriptionPlanDaoImpl implements FrequencyDao {
-    private final FrequencyRepository repository;
-
+public class SubscriptionPlanDaoImpl implements SubscriptionPlanDao {
+    private final SubscriptionPlanRepository repository;
 
     @Override
-    public Optional<Frequency> findOne(Integer id) {
+    public Optional<SubscriptionPlan> findOne(Integer id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Frequency> findAll() {
+    public List<SubscriptionPlan> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Frequency insert(Frequency obj) {
+    public SubscriptionPlan insert(SubscriptionPlan obj) {
         return repository.save(obj);
     }
 
     @Override
-    public void update(Frequency obj) {
+    public void update(SubscriptionPlan obj) {
         repository.save(obj);
     }
 
     @Override
-    public void delete(Frequency obj) {
+    public void delete(SubscriptionPlan obj) {
         repository.delete(obj);
     }
 }

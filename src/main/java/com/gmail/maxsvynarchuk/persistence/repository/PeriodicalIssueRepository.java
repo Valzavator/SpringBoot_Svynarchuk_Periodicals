@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PeriodicalIssueRepository extends JpaRepository<PeriodicalIssue, Long> {
 
-    List<PeriodicalIssue> findByPeriodical(Periodical periodical);
+    List<PeriodicalIssue> findByPeriodicalOrderByPublicationDate(Periodical periodical);
 
     boolean existsPeriodicalIssueByIssueNoAndPeriodical(String issueNumber, Periodical periodical);
 

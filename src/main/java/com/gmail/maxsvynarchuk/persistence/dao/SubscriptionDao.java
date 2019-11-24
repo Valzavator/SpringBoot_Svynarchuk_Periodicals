@@ -4,6 +4,8 @@ import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -23,11 +25,10 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
      *
      * @param user      user of system
      * @param isExpired this expired or active subscription
-     * @param skip      skip
-     * @param limit     limit
+     * @param pageable  pageable
      * @return list of retrieved subscriptions
      */
-    List<Subscription> findByUserAndStatus(User user, boolean isExpired, long skip, long limit);
+    Page<Subscription> findByUserAndStatus(User user, boolean isExpired, Pageable pageable);
 
     /**
      * Retrieves all subscriptions associated with certain payment.
@@ -37,12 +38,4 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
      */
     List<Subscription> findByPayment(Payment payment);
 
-    /**
-     * Retrieves count of objects from database.
-     *
-     * @param user user of system
-     * @param isExpired this expired or active subscription
-     * @return count of active subscriptions associated with certain user.
-     */
-    long getCountByUserAndStatus(User user, boolean isExpired);
 }

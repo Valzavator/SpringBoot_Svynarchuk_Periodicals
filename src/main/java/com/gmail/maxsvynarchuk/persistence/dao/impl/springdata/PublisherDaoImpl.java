@@ -1,8 +1,8 @@
 package com.gmail.maxsvynarchuk.persistence.dao.impl.springdata;
 
-import com.gmail.maxsvynarchuk.persistence.dao.FrequencyDao;
-import com.gmail.maxsvynarchuk.persistence.entity.Frequency;
-import com.gmail.maxsvynarchuk.persistence.repository.FrequencyRepository;
+import com.gmail.maxsvynarchuk.persistence.dao.PublisherDao;
+import com.gmail.maxsvynarchuk.persistence.entity.Publisher;
+import com.gmail.maxsvynarchuk.persistence.repository.PublisherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -11,32 +11,31 @@ import java.util.Optional;
 
 @Repository
 @AllArgsConstructor
-public class PublisherDaoImpl implements FrequencyDao {
-    private final FrequencyRepository repository;
-
+public class PublisherDaoImpl implements PublisherDao {
+    private final PublisherRepository repository;
 
     @Override
-    public Optional<Frequency> findOne(Integer id) {
+    public Optional<Publisher> findOne(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Frequency> findAll() {
+    public List<Publisher> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Frequency insert(Frequency obj) {
+    public Publisher insert(Publisher obj) {
         return repository.save(obj);
     }
 
     @Override
-    public void update(Frequency obj) {
+    public void update(Publisher obj) {
         repository.save(obj);
     }
 
     @Override
-    public void delete(Frequency obj) {
+    public void delete(Publisher obj) {
         repository.delete(obj);
     }
 }

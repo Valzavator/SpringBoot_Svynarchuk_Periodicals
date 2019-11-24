@@ -20,7 +20,7 @@ public class PeriodicalIssueDaoImpl implements PeriodicalIssueDao {
 
     @Override
     public List<PeriodicalIssue> findByPeriodical(Periodical periodical) {
-        return repository.findByPeriodical(periodical);
+        return repository.findByPeriodicalOrderByPublicationDate(periodical);
     }
 
     @Override

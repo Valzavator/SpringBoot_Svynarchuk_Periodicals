@@ -8,7 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PeriodicalRepository extends JpaRepository<Periodical, Long> {
 
-    Page<Periodical> findByPeriodicalStatus(PeriodicalStatus status, Pageable pageable);
+    Page<Periodical> findByPeriodicalStatusOrderByPeriodicalStatusDescPeriodicalIdDesc(
+            PeriodicalStatus status, Pageable pageable);
 
     long countByPeriodicalStatus(PeriodicalStatus status);
 

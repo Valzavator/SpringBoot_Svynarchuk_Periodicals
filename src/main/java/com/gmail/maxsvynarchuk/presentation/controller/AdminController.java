@@ -1,12 +1,13 @@
 package com.gmail.maxsvynarchuk.presentation.controller;
 
-import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
-import com.gmail.maxsvynarchuk.persistence.dao.RoleDao;
-import com.gmail.maxsvynarchuk.persistence.dao.UserDao;
+import com.gmail.maxsvynarchuk.persistence.dao.*;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,18 +29,28 @@ public class AdminController {
     private final UserDao userDao;
     private final RoleDao roleDao;
     private final PaymentDao paymentDao;
+    private final PeriodicalDao periodicalDao;
+    private final SubscriptionDao subscriptionDao;
 
     @GetMapping("/")
     public void adminPage() {
 //        log.error(userDao.findAll().toString());
 //        log.error(roleDao.findAll().toString());
-        Payment p = Payment.builder()
-                .paymentDate(LocalDateTime.now())
-                .totalPrice(new BigDecimal("111111111.11"))
-                .user(User.builder().userId(1L).build())
-                .build();
-        log.error(paymentDao.insert(p).toString());
-        log.error(paymentDao.findAll().toString());
+//        Payment p = Payment.builder()
+//                .paymentDate(LocalDateTime.now())
+//                .totalPrice(new BigDecimal("111111111.11"))
+//                .user(User.builder().userId(1L).build())
+//                .build();
+//        log.error(periodicalDao.findAll().toString());
+
+//        log.error(paymentDao.findAll(PageRequest.of(0, 10)).getContent().toString());
+//        log.error(subscriptionDao.isUserAlreadySubscribed(
+//                User.builder().userId(2L).build(),
+//                Periodical.builder().periodicalId(12L).build()));
+//        log.error(subscriptionDao.findByUserAndStatus(
+//                User.builder().userId(2L).build(),
+//                false,
+//                PageRequest.of(0, 10)).getContent().toString());
 //        return "/index";
     }
 }

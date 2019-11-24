@@ -4,6 +4,8 @@ import com.gmail.maxsvynarchuk.persistence.dao.PaymentDao;
 import com.gmail.maxsvynarchuk.persistence.entity.Payment;
 import com.gmail.maxsvynarchuk.persistence.repository.PaymentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,6 +24,11 @@ public class PaymentDaoImpl implements PaymentDao {
     @Override
     public List<Payment> findAll() {
         return repository.findAll();
+    }
+
+    @Override
+    public Page<Payment> findAll(Pageable pageable) {
+        return repository.findAllByOrderByPaymentDateDesc(pageable);
     }
 
     @Override
