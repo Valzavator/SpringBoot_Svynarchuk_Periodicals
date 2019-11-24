@@ -4,8 +4,6 @@ package com.gmail.maxsvynarchuk.presentation.filter;
 import com.gmail.maxsvynarchuk.presentation.util.Util;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +20,6 @@ import java.util.Set;
  *
  * @author Maksym Svynarhchuk
  */
-//@Component
-//@Order(1)
 public class AuthenticationFilter implements Filter {
     private static final Set<String> freePaths = new HashSet<>();
 
@@ -34,6 +30,8 @@ public class AuthenticationFilter implements Filter {
         freePaths.add(PagesPaths.SIGN_UP_PATH);
         freePaths.add(PagesPaths.PERIODICAL_PATH);
         freePaths.add(PagesPaths.CATALOG_PATH);
+        //TODO
+        freePaths.add("/error");
     }
 
     @Override
@@ -50,17 +48,19 @@ public class AuthenticationFilter implements Filter {
         boolean isSignUpRequest = PagesPaths.SIGN_UP_PATH.equals(requestPath);
         boolean isSignInRequest = PagesPaths.SIGN_IN_PATH.equals(requestPath);
 
+        System.out.println("\n\n\n" + requestPath + "\n\n\n");
+
         if (isLoggedIn) {
             if (isSignUpRequest || isSignInRequest) {
                 Util.redirectTo(req, resp, PagesPaths.HOME_PATH);
             } else {
-                chain.doFilter(req, resp);
+                chain.doFilter(request, response);
             }
         } else {
             if (freePaths.contains(requestPath)) {
-                chain.doFilter(req, resp);
+                chain.doFilter(request, response);
             } else {
-                Util.redirectTo(req, resp, PagesPaths.SIGN_IN_PATH);
+                Util.redirectTo(req, resp, PagesPaths.HOME_PATH);
             }
         }
     }

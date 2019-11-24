@@ -1,18 +1,13 @@
 <%--@elvariable id="errors" type="java.util.Map"--%>
 <%--@elvariable id="errorAuthentication" type="java.lang.Boolean"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
-
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
 </head>
 <body class="d-flex flex-column h-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container h-100">
     <div class="row h-100 justify-content-md-center align-items-center">
         <div class="card w-50 mx-auto">
@@ -89,6 +84,6 @@
         </div>
     </div>
 </main>
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </body>
 </html>

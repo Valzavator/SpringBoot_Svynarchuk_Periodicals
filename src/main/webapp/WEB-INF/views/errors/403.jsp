@@ -7,7 +7,7 @@
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
+    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/error.css"/>">
 </head>
 <body class="d-flex flex-column h-100">

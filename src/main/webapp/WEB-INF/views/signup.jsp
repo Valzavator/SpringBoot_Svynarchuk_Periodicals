@@ -9,7 +9,7 @@
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/head.jsp"/>
+    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
 </head>
 <body class="d-flex flex-column min-vh-100">
 <jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>

@@ -1,18 +1,11 @@
 package com.gmail.maxsvynarchuk.presentation.util.validator;
 
-import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
-import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
-import com.gmail.maxsvynarchuk.persistence.entity.User;
 //import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreateIssueCommand;
 //import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostCreatePeriodicalCommand;
 //import com.gmail.maxsvynarchuk.presentation.command.impl.admin.PostEditPeriodicalCommand;
 //import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignInCommand;
 //import com.gmail.maxsvynarchuk.presentation.command.impl.authorization.PostSignUpCommand;
-import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
-import com.gmail.maxsvynarchuk.presentation.util.validator.impl.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 ///**
 // * Manager for validation data in {@link com.gmail.maxsvynarchuk.presentation.command.Command#execute} methods

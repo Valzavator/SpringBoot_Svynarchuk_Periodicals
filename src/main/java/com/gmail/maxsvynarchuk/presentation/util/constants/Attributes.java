@@ -44,6 +44,7 @@ public final class Attributes {
     public static final String ERROR_ISSUE_NUMBER = ResourceManager.ATTRIBUTE.getProperty("error.issue.number");
     public static final String ERROR_ISSUE_DESCRIPTION = ResourceManager.ATTRIBUTE.getProperty("error.issue.description");
     public static final String ERROR_ISSUE_EXIST = ResourceManager.ATTRIBUTE.getProperty("error.issue.exist");
+    public static final String ERROR_MESSAGE = ResourceManager.ATTRIBUTE.getProperty("error.message");
 
     public static final String PAGINATION_PAGE = ResourceManager.ATTRIBUTE.getProperty("pagination.page");
     public static final String PAGINATION_NUMBER_OF_PAGES = ResourceManager.ATTRIBUTE.getProperty("pagination.number.pages");

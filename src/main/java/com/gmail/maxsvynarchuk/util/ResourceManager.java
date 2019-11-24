@@ -3,9 +3,9 @@ package com.gmail.maxsvynarchuk.util;
 import java.util.ResourceBundle;
 
 public enum ResourceManager {
-    DATABASE(java.util.ResourceBundle.getBundle("properties.database")),
-    QUERIES(java.util.ResourceBundle.getBundle("properties.mysql_queries")),
-    PATH(java.util.ResourceBundle.getBundle("properties.path")),
+    DATABASE(ResourceBundle.getBundle("properties.database")),
+    QUERIES(ResourceBundle.getBundle("properties.mysql_queries")),
+    PATH(ResourceBundle.getBundle("properties.path")),
     VIEW(ResourceBundle.getBundle("properties.view")),
     ATTRIBUTE(ResourceBundle.getBundle("properties.attribute")),
     PARAMETER(ResourceBundle.getBundle("properties.parameter"));

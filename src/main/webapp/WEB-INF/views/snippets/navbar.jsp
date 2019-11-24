@@ -1,11 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.presentation.util.constants.Views" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
 
 <c:set var="homeView" scope="page" value="${Views.HOME_VIEW}"/>
 <c:set var="profileView" scope="page" value="${Views.PROFILE_VIEW}"/>

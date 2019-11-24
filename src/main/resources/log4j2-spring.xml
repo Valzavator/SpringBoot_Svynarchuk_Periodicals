@@ -7,7 +7,7 @@
     </Properties>
     <Appenders>
         <Console name="STDOUT" target="SYSTEM_OUT">
-            <PatternLayout pattern="${pattern}"/>
+            <PatternLayout pattern="%highlight{%d{DEFAULT} [%t] %-5level %logger{} - %msg%n}{FATAL=bright red, ERROR=red, WARN=yellow, INFO=cyan, DEBUG=blue, TRACE=white}"/>
         </Console>
         <RollingFile
                 name="SERVER_LOGS_FILE"
