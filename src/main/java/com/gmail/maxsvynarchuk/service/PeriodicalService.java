@@ -35,7 +35,7 @@ public class PeriodicalService {
     private final FrequencyDao frequencyDao;
     private final PublisherDao publisherDao;
 
-        public Periodical createPeriodical(Periodical periodical) {
+    public Periodical createPeriodical(Periodical periodical) {
         return periodicalDao.insert(periodical);
     }
 
@@ -52,32 +52,38 @@ public class PeriodicalService {
         }
     }
 
+    @Transactional(readOnly = true)
     public Optional<Periodical> findPeriodicalById(Long id) {
         log.debug("Attempt to find periodical by id");
         return periodicalDao.findOne(id);
     }
 
+    @Transactional(readOnly = true)
     public Page<Periodical> findAllPeriodicals(Pageable pageable) {
         log.debug("Attempt to find all periodicals");
         return periodicalDao.findAll(pageable);
     }
 
+    @Transactional(readOnly = true)
     public Page<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status,
                                                        Pageable pageable) {
         log.debug("Attempt to find all periodicals by status");
         return periodicalDao.findByStatus(status, pageable);
     }
 
+    @Transactional(readOnly = true)
     public List<PeriodicalType> findAllPeriodicalTypes() {
         log.debug("Attempt to find all periodical types");
         return periodicalTypeDao.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<Frequency> findAllFrequencies() {
         log.debug("Attempt to find all frequencies");
         return frequencyDao.findAll();
     }
 
+    @Transactional(readOnly = true)
     public List<Publisher> findAllPublishers() {
         log.debug("Attempt to find all publishers");
         return publisherDao.findAll();

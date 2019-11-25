@@ -28,6 +28,7 @@ public class UserService {
     private final PasswordManager passwordManager;
     private final UserDao userDao;
 
+    @Transactional(readOnly = true)
     public Optional<User> signIn(String email, String password) {
         log.debug("Attempt to sign in");
         if (Objects.isNull(email) || Objects.isNull(password)) {
@@ -38,6 +39,7 @@ public class UserService {
                 password, u.getPassword()));
     }
 
+    @Transactional(readOnly = true)
     public Optional<User> findUserById(Long id) {
         log.debug("Attempt to find user by id");
         return userDao.findOne(id);

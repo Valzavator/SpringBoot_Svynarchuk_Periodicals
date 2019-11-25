@@ -34,6 +34,7 @@ public class SubscriptionService {
     private final PaymentService paymentService;
     private final PeriodicalService periodicalService;
 
+    @Transactional(readOnly = true)
     public Page<Subscription> findAllSubscriptionsByUserAndStatus(User user,
                                                                   boolean isExpired,
                                                                   Pageable pageable) {
@@ -41,6 +42,7 @@ public class SubscriptionService {
         return subscriptionDao.findByUserAndStatus(user, isExpired, pageable);
     }
 
+    @Transactional(readOnly = true)
     public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
         log.debug("Attempt to find all subscriptions by payment");
         List<Subscription> subscriptions = subscriptionDao.findByPayment(payment);
@@ -82,16 +84,19 @@ public class SubscriptionService {
         }
     }
 
+    @Transactional(readOnly = true)
     public boolean isAlreadySubscribed(User user, Periodical periodical) {
         log.debug("Attempt to check that user is already subscribed");
         return subscriptionDao.isUserAlreadySubscribed(user, periodical);
     }
 
+    @Transactional(readOnly = true)
     public List<SubscriptionPlan> findAllSubscriptionPlans() {
         log.debug("Attempt to find all subscription plans");
         return subscriptionPlanDao.findAll();
     }
 
+    @Transactional(readOnly = true)
     public Optional<SubscriptionPlan> findSubscriptionPlanById(Integer id) {
         log.debug("Attempt to find subscription plan by id");
         return subscriptionPlanDao.findOne(id);

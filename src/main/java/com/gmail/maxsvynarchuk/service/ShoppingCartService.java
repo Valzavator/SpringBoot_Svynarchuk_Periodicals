@@ -50,6 +50,7 @@ public class ShoppingCartService {
         shoppingCart.removeAll();
     }
 
+    @Transactional(readOnly = true)
     public void updateShoppingCartItemsFromDatabase(ShoppingCart shoppingCart) {
         for (Subscription subscription : shoppingCart.getItems()) {
             Optional<Periodical> periodicalOpt =

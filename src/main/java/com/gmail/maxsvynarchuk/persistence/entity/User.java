@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.persistence.entity;
 
 import com.gmail.maxsvynarchuk.util.type.Gender;
+import com.gmail.maxsvynarchuk.util.type.RoleType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,4 +46,8 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id")
     @NotNull
     private Role role;
+
+    public boolean isAdmin() {
+        return RoleType.ADMIN.getValue().equals(role);
+    }
 }

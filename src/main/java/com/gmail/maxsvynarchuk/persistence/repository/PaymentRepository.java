@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PaymentRepository extends JpaRepository<Payment, Long> {
 
-    Page<Payment> findAllByOrderByPaymentDateDesc(Pageable pageable);
+    Page<Payment> findAllByOrderByPaymentDateTimeDesc(Pageable pageable);
 
 }

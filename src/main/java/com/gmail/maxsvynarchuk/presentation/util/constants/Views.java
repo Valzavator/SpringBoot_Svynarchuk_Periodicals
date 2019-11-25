@@ -27,7 +27,7 @@ public final class Views {
 
     public static final String ERROR_403_VIEW = ResourceManager.VIEW.getProperty("view.error.403");
     public static final String ERROR_404_VIEW = ResourceManager.VIEW.getProperty("view.error.404");
-    public static final String ERROR_GLOBAL_VIEW = ResourceManager.VIEW.getProperty("view.error.404");
+    public static final String ERROR_GLOBAL_VIEW = ResourceManager.VIEW.getProperty("view.error.global");
 
     private Views() {
     }

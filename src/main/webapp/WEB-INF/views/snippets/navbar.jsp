@@ -13,7 +13,7 @@
 <c:set var="adminCreatePeriodicalView" scope="page" value="${Views.CREATE_PERIODICAL_VIEW}"/>
 <c:set var="adminPaymentsView" scope="page" value="${Views.PAYMENTS_VIEW}"/>
 <c:set var="currView" scope="page">
-    <myLib:viewUri/>
+    /WEB-INF/views/<myLib:viewUri/>.jsp
 </c:set>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">

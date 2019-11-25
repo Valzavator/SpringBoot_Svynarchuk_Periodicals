@@ -28,7 +28,7 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public Page<Payment> findAll(Pageable pageable) {
-        return repository.findAllByOrderByPaymentDateDesc(pageable);
+        return repository.findAllByOrderByPaymentDateTimeDesc(pageable);
     }
 
     @Override

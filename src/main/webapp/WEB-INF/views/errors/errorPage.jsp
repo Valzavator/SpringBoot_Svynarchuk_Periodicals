@@ -1,23 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isErrorPage="true"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/error.css"/>">
 </head>
-<body class="d-flex flex-column h-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
-<main role="main" class="container h-100">
-    <div class="row h-100 justify-content-md-center align-items-center">
+<body class="d-flex flex-column min-vh-100">
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
+<main role="main" class="container min-vh-100 mb-5">
+    <div class="row min-vh-100 justify-content-md-center align-items-center">
         <div class=" text-center">
             <h1 class="default-status-error"><fmt:message key="error.default.status"/></h1>
             <c:if test="${not empty requestScope.message}">
-                <p class="default-text-muted-error">
+                <p class="default-text-muted-error text-break">
                     <c:out value="${requestScope.message}"/>
                 </p>
             </c:if>
@@ -28,6 +24,6 @@
         </div>
     </div>
 </main>
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </body>
 </html>

@@ -27,11 +27,13 @@ import java.util.Optional;
 public class PaymentService {
     private final PaymentDao paymentDao;
 
+    @Transactional(readOnly = true)
     public Optional<Payment> findPaymentById(Long id) {
         log.debug("Attempt to find payment by id");
         return paymentDao.findOne(id);
     }
 
+    @Transactional(readOnly = true)
     public Page<Payment> findAllPayments(Pageable pageable) {
         log.debug("Attempt to find all payments");
         return paymentDao.findAll(pageable);
