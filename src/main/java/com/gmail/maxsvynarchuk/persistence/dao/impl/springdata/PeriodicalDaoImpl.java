@@ -33,6 +33,11 @@ public class PeriodicalDaoImpl implements PeriodicalDao {
     }
 
     @Override
+    public Page<Periodical> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
+    }
+
+    @Override
     public Periodical insert(Periodical obj) {
         return repository.save(obj);
     }

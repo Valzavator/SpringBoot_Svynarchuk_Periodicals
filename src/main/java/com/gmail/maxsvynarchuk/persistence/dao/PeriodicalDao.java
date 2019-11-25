@@ -14,4 +14,6 @@ public interface PeriodicalDao extends GenericDao<Periodical, Long> {
      * @return list of retrieved periodicals
      */
     Page<Periodical> findByStatus(PeriodicalStatus status, Pageable pageable);
+
+    Page<Periodical> findAll(Pageable pageable);
 }

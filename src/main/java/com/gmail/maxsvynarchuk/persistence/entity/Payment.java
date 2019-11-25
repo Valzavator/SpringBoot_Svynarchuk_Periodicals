@@ -30,7 +30,7 @@ public class Payment implements Serializable {
     private Long paymentId;
 
     @NotNull
-    private LocalDateTime paymentDate;
+    private LocalDateTime paymentDateTime;
 
     @Digits(integer = 10, fraction = 2)
     @NotNull
