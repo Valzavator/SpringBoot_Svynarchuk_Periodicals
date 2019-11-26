@@ -2,18 +2,21 @@
          import="com.gmail.maxsvynarchuk.presentation.util.constants.Views" %>
 <%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
 
-<c:set var="homeView" scope="page" value="${Views.HOME_VIEW}"/>
-<c:set var="profileView" scope="page" value="${Views.PROFILE_VIEW}"/>
-<c:set var="signInView" scope="page" value="${Views.SIGN_IN_VIEW}"/>
-<c:set var="signUpView" scope="page" value="${Views.SIGN_UP_VIEW}"/>
-<c:set var="catalogView" scope="page" value="${Views.CATALOG_VIEW}"/>
-<c:set var="cartView" scope="page" value="${Views.CART_VIEW}"/>
-<c:set var="subscriptionsView" scope="page" value="${Views.SUBSCRIPTIONS_VIEW}"/>
-<c:set var="adminCatalogView" scope="page" value="${Views.ADMIN_CATALOG_VIEW}"/>
-<c:set var="adminCreatePeriodicalView" scope="page" value="${Views.CREATE_PERIODICAL_VIEW}"/>
-<c:set var="adminPaymentsView" scope="page" value="${Views.PAYMENTS_VIEW}"/>
+<c:set var="viewPrefix" scope="page" value="/WEB-INF/views/"/>
+<c:set var="viewSuffix" scope="page" value=".jsp"/>
+
+<c:set var="homeView" scope="page" value="${viewPrefix}${Views.HOME_VIEW}${viewSuffix}"/>
+<c:set var="profileView" scope="page" value="${viewPrefix}${Views.PROFILE_VIEW}${viewSuffix}"/>
+<c:set var="signInView" scope="page" value="${viewPrefix}${Views.SIGN_IN_VIEW}${viewSuffix}"/>
+<c:set var="signUpView" scope="page" value="${viewPrefix}${Views.SIGN_UP_VIEW}${viewSuffix}"/>
+<c:set var="catalogView" scope="page" value="${viewPrefix}${Views.CATALOG_VIEW}${viewSuffix}"/>
+<c:set var="cartView" scope="page" value="${viewPrefix}${Views.CART_VIEW}${viewSuffix}"/>
+<c:set var="subscriptionsView" scope="page" value="${viewPrefix}${Views.SUBSCRIPTIONS_VIEW}${viewSuffix}"/>
+<c:set var="adminCatalogView" scope="page" value="${viewPrefix}${Views.ADMIN_CATALOG_VIEW}${viewSuffix}"/>
+<c:set var="adminCreatePeriodicalView" scope="page" value="${viewPrefix}${Views.CREATE_PERIODICAL_VIEW}${viewSuffix}"/>
+<c:set var="adminPaymentsView" scope="page" value="${viewPrefix}${Views.PAYMENTS_VIEW}${viewSuffix}"/>
 <c:set var="currView" scope="page">
-    /WEB-INF/views/<myLib:viewUri/>.jsp
+    <myLib:viewUri/>
 </c:set>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">

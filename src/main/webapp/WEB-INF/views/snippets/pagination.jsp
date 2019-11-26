@@ -1,9 +1,6 @@
 <%--@elvariable id="numberOfPages" type="java.lang.Integer"--%>
 <%--@elvariable id="page" type="java.lang.Integer"--%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-         import="com.gmail.maxsvynarchuk.presentation.util.constants.Views" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="myLib" uri="/WEB-INF/tag/requestedViewTag" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <c:if test="${numberOfPages gt 1}">
     <nav aria-label="Page navigation" class="mb-5">

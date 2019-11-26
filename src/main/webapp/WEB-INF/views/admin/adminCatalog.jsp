@@ -1,17 +1,13 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container">
 
     <div class="d-flex justify-content-center align-items-center">
@@ -116,39 +112,11 @@
                     </tbody>
                 </table>
             </div>
-            <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
+            <%@ include file="/WEB-INF/views/snippets/pagination.jsp" %>
         </c:otherwise>
     </c:choose>
 </main>
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 
-<!-- Modal -->
-<div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-<%--<c:if test="${true}">--%>
-<%--    <script type="text/javascript" defer>--%>
-<%--        $(document).ready(function () {--%>
-<%--            $("#errorModal").modal("show");--%>
-<%--        });--%>
-<%--    </script>--%>
-<%--</c:if>--%>
 </body>
 </html>

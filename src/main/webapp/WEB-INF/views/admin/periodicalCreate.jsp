@@ -1,15 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container min-vh-100 mb-5">
     <div class="row min-vh-100 justify-content-md-center align-items-center">
         <div class="card w-75 mx-auto">
@@ -21,7 +18,7 @@
                 <form accept-charset="UTF-8" role="form" method="post">
                     <input type="hidden" name="periodicalId" value="${requestScope.periodicalDTO.id}"/>
 
-                    <jsp:include page="/WEB-INF/views/snippets/periodicalFormFields.jsp"/>
+                    <%@ include file="/WEB-INF/views/snippets/periodicalFormFields.jsp" %>
 
                     <div class="form-group text-center">
                         <button type="submit" class="btn btn-primary btn-lg mt-3">
@@ -35,6 +32,6 @@
         </div>
     </div>
 </main>
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </body>
 </html>

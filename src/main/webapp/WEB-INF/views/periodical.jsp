@@ -1,18 +1,14 @@
 <%--@elvariable id="periodical" type="com.gmail.maxsvynarchuk.persistence.entity.Periodical"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container">
     <div class="card border-dark mb-5">
         <div class="row no-gutters ">
@@ -198,10 +194,10 @@
         </c:otherwise>
     </c:choose>
 
-    <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/pagination.jsp" %>
 </main>
 
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 
 <!-- Modal -->
 <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

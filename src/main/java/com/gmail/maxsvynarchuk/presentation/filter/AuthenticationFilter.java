@@ -48,8 +48,6 @@ public class AuthenticationFilter implements Filter {
         boolean isSignUpRequest = PagesPaths.SIGN_UP_PATH.equals(requestPath);
         boolean isSignInRequest = PagesPaths.SIGN_IN_PATH.equals(requestPath);
 
-        System.out.println("\n\n\n" + requestPath + "\n\n\n");
-
         if (isLoggedIn) {
             if (isSignUpRequest || isSignInRequest) {
                 Util.redirectTo(req, resp, PagesPaths.HOME_PATH);

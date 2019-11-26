@@ -120,7 +120,7 @@
             </div>
         </div>
     </c:forEach>
-    <jsp:include page="/WEB-INF/views/snippets/pagination.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/pagination.jsp" %>
 </main>
 
 <%@ include file="/WEB-INF/views/snippets/footer.jsp" %>

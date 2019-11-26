@@ -1,10 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<fmt:setLocale value="${sessionScope.locale}"/>
-<fmt:setBundle basename="i18n.lang"/>
+<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <c:choose>
     <c:when test="${empty active && empty expired  && not empty requestScope.activeSubscriptions}">
@@ -17,10 +13,10 @@
 
 <html>
 <head>
-    <jsp:include page="/WEB-INF/views/snippets/stylesheets.jsp"/>
+    <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
 </head>
 <body class="d-flex flex-column min-vh-100">
-<jsp:include page="/WEB-INF/views/snippets/navbar.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container">
     <div class="d-flex justify-content-center align-items-center">
         <h1 class="display-3">
@@ -258,6 +254,6 @@
     </c:choose>
 
 </main>
-<jsp:include page="/WEB-INF/views/snippets/footer.jsp"/>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </body>
 </html>
