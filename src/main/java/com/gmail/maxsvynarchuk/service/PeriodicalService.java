@@ -65,7 +65,7 @@ public class PeriodicalService {
     public Page<Periodical> findAllPeriodicals(int page, int size) {
         log.debug("Attempt to find all periodicals");
         PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
-                Sort.Order.desc("status"),
+                Sort.Order.asc("status"),
                 Sort.Order.desc("id")));
         return periodicalDao.findAll(pageable);
     }
@@ -76,7 +76,7 @@ public class PeriodicalService {
                                                        int size) {
         log.debug("Attempt to find all periodicals by status");
         PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
-                Sort.Order.desc("status"),
+                Sort.Order.asc("status"),
                 Sort.Order.desc("id")));
         return periodicalDao.findByStatus(status, pageable);
     }

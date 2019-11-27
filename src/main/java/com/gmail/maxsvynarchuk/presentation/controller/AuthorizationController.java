@@ -26,19 +26,19 @@ public class AuthorizationController {
 
     @GetMapping("/signin")
     public String getSignInPage() {
-        log.info("Try to get sign In page");
+        log.debug("Attempt to get sign In page");
         return Views.SIGN_IN_VIEW;
     }
 
     @GetMapping("/signup")
     public String getSignUpPage() {
-        log.info("Try to get sign Up page");
+        log.debug("Attempt to get sign Up page");
         return Views.SIGN_UP_VIEW;
     }
 
     @GetMapping("/signout")
     public String signOut(HttpSession session) {
-        log.info("Sign out");
+        log.debug("Attempt to Sign out");
         session.invalidate();
         return Util.redirectTo(PagesPaths.HOME_PATH);
     }
@@ -76,7 +76,7 @@ public class AuthorizationController {
 
         model.addAttribute(Attributes.ERROR_IS_ALREADY_IN_CART, true);
         model.addAttribute(Attributes.ERRORS, errors);
-        model.addAttribute(Attributes.USER, userDTO);
+        model.addAttribute(Attributes.USER_DTO, userDTO);
 
         log.debug("User fail sign in");
         return Views.SIGN_IN_VIEW;

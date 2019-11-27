@@ -1,3 +1,4 @@
+<%--@elvariable id="pageDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="java.sql.Timestamp" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
@@ -20,7 +21,7 @@
         <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <c:choose>
-        <c:when test="${empty requestScope.payments}">
+        <c:when test="${empty pageDTO.elements}">
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <h1 class="display-4 text-info">
                     <span class="badge badge-info"><fmt:message key="payments.empty"/></span>
@@ -40,7 +41,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="payment" items="${requestScope.payments}" varStatus="counter">
+                    <c:forEach var="payment" items="${pageDTO.elements}" varStatus="counter">
                         <tr>
                             <th scope="row" class="align-middle">${counter.count}</th>
                             <td class="align-middle overflow-text">

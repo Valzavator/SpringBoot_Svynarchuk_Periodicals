@@ -38,22 +38,6 @@ public class Util {
         return "redirect:" + pageToRedirect;
     }
 
-//    /**
-//     * Get shopping cart for user
-//     *
-//     * @param session HttpSession
-//     * @return existing shopping cart or new one
-//     */
-//    public static ShoppingCart getShoppingCart(HttpSession session) {
-//        ShoppingCart shoppingCart =
-//                (ShoppingCart) session.getAttribute(Attributes.SHOPPING_CART);
-//        if (Objects.isNull(shoppingCart)) {
-//            shoppingCart = new ShoppingCart();
-//            session.setAttribute(Attributes.SHOPPING_CART, shoppingCart);
-//        }
-//        return shoppingCart;
-//    }
-
     /**
      * @return referer path without servlet path at the beginning
      */

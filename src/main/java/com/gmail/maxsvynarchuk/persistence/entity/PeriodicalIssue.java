@@ -20,7 +20,7 @@ import javax.validation.constraints.NotNull;
 public class PeriodicalIssue implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "periodical_issues_id")
+    @Column(name = "periodical_issue_id")
     private Long id;
 
     @Column(name = "issues_name")

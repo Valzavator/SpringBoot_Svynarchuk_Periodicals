@@ -22,7 +22,11 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
 
     @Override
     public boolean isUserAlreadySubscribed(User user, Periodical periodical) {
-        return repository.existsByUserAndPeriodical(user, periodical);
+        LocalDate curDate = LocalDate.now();
+        return repository.existsByUserAndPeriodicalAndEndDateIsGreaterThanEqual(
+                user,
+                periodical,
+                curDate);
     }
 
     @Override

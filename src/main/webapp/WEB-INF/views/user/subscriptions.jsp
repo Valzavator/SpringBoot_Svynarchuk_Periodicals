@@ -1,12 +1,16 @@
+<%--@elvariable id="activeSubscriptions" type="com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO"--%>
+<%--@elvariable id="expiredSubscriptions" type="com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO"--%>
+<%--@elvariable id="active" type="java.lang.String"--%>
+<%--@elvariable id="expired" type="java.lang.String"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <c:choose>
-    <c:when test="${empty active && empty expired  && not empty requestScope.activeSubscriptions}">
+    <c:when test="${empty active && empty expired  && not empty activeSubscriptions.elements}">
         <c:set var="active" scope="page" value="${true}"/>
     </c:when>
-    <c:when test="${empty active && empty expired && not empty requestScope.expiredSubscriptions}">
+    <c:when test="${empty active && empty expired && not empty expiredSubscriptions.elements}">
         <c:set var="expired" scope="page" value="${true}"/>
     </c:when>
 </c:choose>
@@ -29,7 +33,7 @@
         <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <c:choose>
-        <c:when test="${empty requestScope.activeSubscriptions && empty requestScope.expiredSubscriptions }">
+        <c:when test="${empty activeSubscriptions.elements && empty expiredSubscriptions.elements }">
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <h1 class="display-4 text-info">
                     <span class="badge badge-info"><fmt:message key="subscriptions.empty"/></span>
@@ -43,7 +47,7 @@
                                 <c:if test="${not empty active}">
                                     active
                                 </c:if>
-                                <c:if test="${empty requestScope.activeSubscriptions}">
+                                <c:if test="${empty activeSubscriptions.elements}">
                                     disabled
                                 </c:if>"
                        id="pills-home-tab"
@@ -57,7 +61,7 @@
                               <c:if test="${not empty expired}">
                                     active
                                 </c:if>
-                                <c:if test="${empty requestScope.expiredSubscriptions}">
+                                <c:if test="${empty expiredSubscriptions.elements}">
                                     disabled
                                 </c:if>"
                        id="pills-profile-tab"
@@ -85,7 +89,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="subscription" items="${requestScope.activeSubscriptions}"
+                            <c:forEach var="subscription" items="${activeSubscriptions.elements}"
                                        varStatus="counter">
                                 <tr>
                                     <th scope="row" class="align-middle">${counter.count}</th>
@@ -127,27 +131,27 @@
                             </tbody>
                         </table>
 
-                        <c:if test="${numberOfActivePages gt 1}">
+                        <c:if test="${activeSubscriptions.numberOfPages gt 1}">
                             <nav aria-label="Page navigation" class="mb-5">
                                 <ul class="pagination pagination-lg justify-content-center">
-                                    <li class="page-item <c:if test="${activePage eq 1}">disabled</c:if>">
+                                    <li class="page-item <c:if test="${activeSubscriptions.currentPage eq 0}">disabled</c:if>">
                                         <a class="page-link"
-                                           href="<c:url value="?pill=active&activePage=${activePage - 1}&expiredPage=${expiredPage}"/>"
+                                           href="<c:url value="?pill=active&activePage=${activeSubscriptions.currentPage - 1}&expiredPage=${expiredSubscriptions.currentPage}"/>"
                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <c:forEach begin="1" end="${numberOfActivePages}" varStatus="counter">
-                                        <li class="page-item <c:if test="${activePage eq counter.count}">disabled</c:if>">
+                                    <c:forEach begin="0" end="${activeSubscriptions.numberOfPages - 1}" var="counter">
+                                        <li class="page-item <c:if test="${activeSubscriptions.currentPage eq counter}">disabled</c:if>">
                                             <a class="page-link"
-                                               href="<c:url value="?pill=active&activePage=${counter.count}&expiredPage=${expiredPage}"/>">
-                                                    ${counter.count}
+                                               href="<c:url value="?pill=active&activePage=${counter}&expiredPage=${expiredSubscriptions.currentPage}"/>">
+                                                    ${counter + 1}
                                             </a>
                                         </li>
                                     </c:forEach>
-                                    <li class="page-item <c:if test="${activePage eq numberOfActivePages}">disabled</c:if>">
+                                    <li class="page-item <c:if test="${activeSubscriptions.currentPage eq activeSubscriptions.numberOfPages - 1}">disabled</c:if>">
                                         <a class="page-link"
-                                           href="<c:url value="?pill=active&activePage=${activePage + 1}&expiredPage=${expiredPage}"/>"
+                                           href="<c:url value="?pill=active&activePage=${activeSubscriptions.currentPage + 1}&expiredPage=${expiredSubscriptions.currentPage}"/>"
                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>
@@ -175,7 +179,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <c:forEach var="subscription" items="${requestScope.expiredSubscriptions}"
+                            <c:forEach var="subscription" items="${expiredSubscriptions.elements}"
                                        varStatus="counter">
                                 <tr>
                                     <th scope="row" class="align-middle">${counter.count}</th>
@@ -217,27 +221,27 @@
                             </tbody>
                         </table>
 
-                        <c:if test="${numberOfExpiredPages gt 1}">
+                        <c:if test="${expiredSubscriptions.numberOfPages gt 1}">
                             <nav aria-label="Page navigation" class="mb-5">
                                 <ul class="pagination pagination-lg justify-content-center">
-                                    <li class="page-item <c:if test="${expiredPage eq 1}">disabled</c:if>">
+                                    <li class="page-item <c:if test="${expiredSubscriptions.currentPage eq 0}">disabled</c:if>">
                                         <a class="page-link"
-                                           href="<c:url value="?pill=expired&activePage=${activePage}&expiredPage=${expiredPage - 1}"/>"
+                                           href="<c:url value="?pill=expired&activePage=${activeSubscriptions.currentPage}&expiredPage=${expiredSubscriptions.currentPage - 1}"/>"
                                            aria-label="Previous">
                                             <span aria-hidden="true">&laquo;</span>
                                         </a>
                                     </li>
-                                    <c:forEach begin="1" end="${numberOfExpiredPages}" varStatus="counter">
-                                        <li class="page-item <c:if test="${expiredPage eq counter.count}">disabled</c:if>">
+                                    <c:forEach begin="0" end="${expiredSubscriptions.numberOfPages - 1}" var="counter">
+                                        <li class="page-item <c:if test="${expiredSubscriptions.currentPage eq counter}">disabled</c:if>">
                                             <a class="page-link"
-                                               href="<c:url value="?pill=expired&activePage=${activePage}&expiredPage=${counter.count}"/>">
-                                                    ${counter.count}
+                                               href="<c:url value="?pill=expired&activePage=${activeSubscriptions.currentPage}&expiredPage=${counter}"/>">
+                                                    ${counter + 1}
                                             </a>
                                         </li>
                                     </c:forEach>
-                                    <li class="page-item <c:if test="${expiredPage eq numberOfExpiredPages}">disabled</c:if>">
+                                    <li class="page-item <c:if test="${expiredSubscriptions.currentPage eq expiredSubscriptions.numberOfPages - 1}">disabled</c:if>">
                                         <a class="page-link"
-                                           href="<c:url value="?pill=expired&activePage=${activePage}&expiredPage=${expiredPage + 1}"/>"
+                                           href="<c:url value="?pill=expired&activePage=${activeSubscriptions.currentPage}&expiredPage=${expiredSubscriptions.currentPage + 1}"/>"
                                            aria-label="Next">
                                             <span aria-hidden="true">&raquo;</span>
                                         </a>

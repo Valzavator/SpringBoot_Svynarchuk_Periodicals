@@ -6,7 +6,9 @@ import com.gmail.maxsvynarchuk.persistence.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,8 +36,10 @@ public class PaymentService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Payment> findAllPayments(Pageable pageable) {
+    public Page<Payment> findAllPayments(int page, int size) {
         log.debug("Attempt to find all payments");
+        PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
+                Sort.Order.desc("paymentDateTime")));
         return paymentDao.findAll(pageable);
     }
 

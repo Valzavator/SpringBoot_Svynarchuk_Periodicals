@@ -8,7 +8,9 @@ import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,8 +39,11 @@ public class SubscriptionService {
     @Transactional(readOnly = true)
     public Page<Subscription> findAllSubscriptionsByUserAndStatus(User user,
                                                                   boolean isExpired,
-                                                                  Pageable pageable) {
+                                                                  int page,
+                                                                  int size) {
         log.debug("Attempt to find all subscriptions by user and status");
+        PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
+                Sort.Order.asc("endDate")));
         return subscriptionDao.findByUserAndStatus(user, isExpired, pageable);
     }
 

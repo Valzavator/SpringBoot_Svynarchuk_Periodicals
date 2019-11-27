@@ -26,6 +26,7 @@ public class Payment implements Serializable {
     private Long id;
 
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @Column(name = "payment_date")
     @NotNull
     private LocalDateTime paymentDateTime;
 

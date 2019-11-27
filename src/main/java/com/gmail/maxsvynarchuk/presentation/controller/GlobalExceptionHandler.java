@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.controller;
 
-import com.gmail.maxsvynarchuk.presentation.exception.PageNotFoundException;
+import com.gmail.maxsvynarchuk.presentation.exception.BadRequestException;
+import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -16,15 +17,16 @@ import java.io.IOException;
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler({MissingServletRequestParameterException.class,
-                      MethodArgumentTypeMismatchException.class,
-                      ConstraintViolationException.class})
+            MethodArgumentTypeMismatchException.class,
+            ConstraintViolationException.class,
+            BadRequestException.class})
     public void handleParameterExceptions(Throwable throwable, HttpServletResponse response)
             throws IOException {
         log.warn(throwable.toString());
         response.sendError(HttpStatus.BAD_REQUEST.value());
     }
 
-    @ExceptionHandler(PageNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     public void handlePageNotFoundException(Throwable throwable, HttpServletResponse response)
             throws IOException {
         log.warn(throwable.toString());
@@ -34,6 +36,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     public void handleThrowable(Throwable throwable, HttpServletResponse response)
             throws IOException {
+        //TODO delete stackTrace
+        throwable.printStackTrace();
         log.error(throwable.toString());
         response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
