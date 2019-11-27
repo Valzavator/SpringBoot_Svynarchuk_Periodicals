@@ -30,13 +30,12 @@ public class Util {
     }
 
     /**
-     * Get authorized user
+     * Add next page to redirect
      *
-     * @param session HttpSession
-     * @return authorized user else {@code null}
+     * @param pageToRedirect page to redirect
      */
-    public static User getAuthorizedUser(HttpSession session) {
-        return (User) session.getAttribute(Attributes.USER);
+    public static String redirectTo(String pageToRedirect) {
+        return "redirect:" + pageToRedirect;
     }
 
 //    /**
@@ -66,14 +65,12 @@ public class Util {
                 URI uri = new URI(header);
                 String path = uri.getPath();
                 String query = uri.getQuery();
-
                 referer = Objects.isNull(query) ? path : path + "?" + query;
             } catch (URISyntaxException e) {
                 throw new IllegalArgumentException(e);
             }
         }
-        return referer.replaceFirst(request.getContextPath(), "")
-                .replaceFirst(request.getServletPath(), "");
+        return referer.replaceFirst(request.getContextPath(), "");
     }
 
     /**
@@ -105,6 +102,12 @@ public class Util {
         } catch (URISyntaxException e) {
             throw new IllegalArgumentException(e);
         }
+    }
+
+    public static String addParameterToURI(String uri,
+                                           String parameterName,
+                                           int parameterValue) {
+        return addParameterToURI(uri, parameterName, String.valueOf(parameterValue));
     }
 
     /**

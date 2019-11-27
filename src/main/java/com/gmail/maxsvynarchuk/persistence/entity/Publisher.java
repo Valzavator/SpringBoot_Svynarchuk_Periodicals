@@ -5,11 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -20,8 +16,10 @@ import javax.validation.constraints.NotNull;
 public class Publisher implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long publisherId;
+    @Column(name = "publisher_id")
+    private Long id;
 
+    @Column(name = "publisher_name")
     @NotNull
-    private String publisherName;
+    private String name;
 }

@@ -21,7 +21,7 @@
         <div class="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
     <c:choose>
-        <c:when test="${empty requestScope.catalog}">
+        <c:when test="${empty requestScope.pageDTO.elements}">
             <div class="d-flex justify-content-center align-items-center mb-5">
                 <h1 class="display-4 ">
                     <span class="badge badge-info"><fmt:message key="admin.management.catalog.empty"/></span>
@@ -43,7 +43,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <c:forEach var="periodical" items="${requestScope.catalog}" varStatus="counter">
+                    <c:forEach var="periodical" items="${requestScope.pageDTO.elements}" varStatus="counter">
                         <tr>
                             <th scope="row" class="align-middle">${counter.count}</th>
                             <td class="align-middle overflow-text"><c:out value="${periodical.name}"/></td>
@@ -91,14 +91,14 @@
                                     <input type="hidden" name="periodicalId" value="${periodical.id}">
                                     <c:choose>
                                         <c:when test="${periodical.status eq PeriodicalStatus.SUSPENDED}">
-                                        <input type="hidden" name="periodicalStatus" value="active">
+                                        <input type="hidden" name="periodicalStatus" value="ACTIVE">
                                         <button type="submit"  class="btn btn-link">
                                             <i class="fa fa-check-circle-o fa-lg" aria-hidden="true">&nbsp;</i>
                                             <fmt:message key="admin.management.catalog.activate"/>
                                         </button>
                                         </c:when>
                                         <c:otherwise>
-                                        <input type="hidden" name="periodicalStatus" value="suspended">
+                                        <input type="hidden" name="periodicalStatus" value="SUSPENDED">
                                         <button type="submit"  class="btn btn-link text-warning">
                                                 <i class="fa fa-ban fa-lg" aria-hidden="true">&nbsp;</i>
                                                 <fmt:message key="admin.management.catalog.suspend"/>

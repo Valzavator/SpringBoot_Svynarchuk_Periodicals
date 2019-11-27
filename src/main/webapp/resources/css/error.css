@@ -3,14 +3,14 @@
 .status-error {
     font-family: Raleway, Helvetica, Arial, sans-serif;
     font-weight: 900;
-    font-size: 160px;
+    font-size: 180px;
     color: #f9fbff;
 }
 
 .text-muted-error {
     font-family: Raleway, Helvetica, Arial, sans-serif;
     color: #f9fbff;
-    font-size: 60px;
+    font-size: 80px;
     font-weight: 700;
 }
 

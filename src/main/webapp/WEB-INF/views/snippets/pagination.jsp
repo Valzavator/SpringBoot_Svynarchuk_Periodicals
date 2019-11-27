@@ -1,24 +1,23 @@
-<%--@elvariable id="numberOfPages" type="java.lang.Integer"--%>
-<%--@elvariable id="page" type="java.lang.Integer"--%>
+<%--@elvariable id="pageDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<c:if test="${numberOfPages gt 1}">
+<c:if test="${pageDTO.numberOfPages gt 1}">
     <nav aria-label="Page navigation" class="mb-5">
         <ul class="pagination pagination-lg justify-content-center">
-            <li class="page-item <c:if test="${page eq 1}">disabled</c:if>">
-                <a class="page-link" href="<c:url value="?page=${page - 1}"/>" aria-label="Previous">
+            <li class="page-item <c:if test="${pageDTO.currentPage eq 0}">disabled</c:if>">
+                <a class="page-link" href="<c:url value="?page=${pageDTO.currentPage - 1}"/>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <c:forEach begin="1" end="${numberOfPages}" varStatus="counter">
-                <li class="page-item <c:if test="${page eq counter.count}">disabled</c:if>">
-                    <a class="page-link" href="<c:url value="?page=${counter.count}"/>">
-                            ${counter.count}
+            <c:forEach begin="0" end="${pageDTO.numberOfPages - 1}" var="counter">
+                <li class="page-item <c:if test="${pageDTO.currentPage eq counter}">disabled</c:if>">
+                    <a class="page-link" href="<c:url value="?page=${counter}"/>">
+                            ${counter + 1}
                     </a>
                 </li>
             </c:forEach>
-            <li class="page-item <c:if test="${page eq numberOfPages}">disabled</c:if>">
-                <a class="page-link" href="<c:url value="?page=${page + 1}"/>" aria-label="Next">
+            <li class="page-item <c:if test="${pageDTO.currentPage eq pageDTO.numberOfPages - 1}">disabled</c:if>">
+                <a class="page-link" href="<c:url value="?page=${pageDTO.currentPage + 1}"/>" aria-label="Next">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>

@@ -58,7 +58,7 @@ public class AuthenticationFilter implements Filter {
             if (freePaths.contains(requestPath)) {
                 chain.doFilter(request, response);
             } else {
-                Util.redirectTo(req, resp, PagesPaths.HOME_PATH);
+                Util.redirectTo(req, resp, PagesPaths.SIGN_IN_PATH);
             }
         }
     }

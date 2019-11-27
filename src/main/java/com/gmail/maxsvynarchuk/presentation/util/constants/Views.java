@@ -25,6 +25,7 @@ public final class Views {
     public static final String PAYMENT_OVERVIEW_VIEW = ResourceManager.VIEW.getProperty("view.payment");
     public static final String USER_VIEW = ResourceManager.VIEW.getProperty("view.admin.user");
 
+    public static final String ERROR_400_VIEW = ResourceManager.VIEW.getProperty("view.error.400");
     public static final String ERROR_403_VIEW = ResourceManager.VIEW.getProperty("view.error.403");
     public static final String ERROR_404_VIEW = ResourceManager.VIEW.getProperty("view.error.404");
     public static final String ERROR_GLOBAL_VIEW = ResourceManager.VIEW.getProperty("view.error.global");

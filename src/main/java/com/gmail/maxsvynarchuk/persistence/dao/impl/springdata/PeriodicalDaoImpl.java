@@ -19,7 +19,7 @@ public class PeriodicalDaoImpl implements PeriodicalDao {
 
     @Override
     public Page<Periodical> findByStatus(PeriodicalStatus status, Pageable pageable) {
-        return repository.findByPeriodicalStatusOrderByPeriodicalStatusDescPeriodicalIdDesc(status, pageable);
+        return repository.findByStatus(status, pageable);
     }
 
     @Override

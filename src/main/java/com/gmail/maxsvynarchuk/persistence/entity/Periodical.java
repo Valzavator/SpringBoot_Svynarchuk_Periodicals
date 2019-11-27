@@ -21,24 +21,30 @@ import javax.validation.constraints.NotNull;
 public class Periodical implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long periodicalId;
+    @Column(name = "periodical_id")
+    private Long id;
 
+    @Column(name = "periodical_name")
     @NotNull
-    private String periodicalName;
+    private String name;
 
+    @Column(name = "periodical_price")
     @Digits(integer=10, fraction = 2)
     @NotNull
-    private BigDecimal periodicalPrice;
+    private BigDecimal price;
 
+    @Column(name = "periodical_description")
     @NotNull
-    private String periodicalDescription;
+    private String description;
 
-    @NotNull
+    @Column(name = "periodical_status")
     @Enumerated(EnumType.STRING)
-    private PeriodicalStatus periodicalStatus;
+    @NotNull
+    private PeriodicalStatus status;
 
-    @JoinColumn(name = "frequency_id")
     @ManyToOne
+    @JoinColumn(name = "frequency_id")
+    @NotNull
     private Frequency frequency;
 
     @ManyToOne

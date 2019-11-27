@@ -12,9 +12,12 @@ import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
@@ -46,8 +49,8 @@ public class PeriodicalService {
 
     public void changeStatus(Periodical periodical, PeriodicalStatus newStatus) {
         log.debug("Attempt to change status of periodical");
-        if (periodical.getPeriodicalStatus() != newStatus) {
-            periodical.setPeriodicalStatus(newStatus);
+        if (periodical.getStatus() != newStatus) {
+            periodical.setStatus(newStatus);
             updatePeriodical(periodical);
         }
     }
@@ -59,15 +62,22 @@ public class PeriodicalService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Periodical> findAllPeriodicals(Pageable pageable) {
+    public Page<Periodical> findAllPeriodicals(int page, int size) {
         log.debug("Attempt to find all periodicals");
+        PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
+                Sort.Order.desc("status"),
+                Sort.Order.desc("id")));
         return periodicalDao.findAll(pageable);
     }
 
     @Transactional(readOnly = true)
     public Page<Periodical> findAllPeriodicalsByStatus(PeriodicalStatus status,
-                                                       Pageable pageable) {
+                                                       int page,
+                                                       int size) {
         log.debug("Attempt to find all periodicals by status");
+        PageRequest pageable = PageRequest.of(Math.max(page, 0), size, Sort.by(
+                Sort.Order.desc("status"),
+                Sort.Order.desc("id")));
         return periodicalDao.findByStatus(status, pageable);
     }
 

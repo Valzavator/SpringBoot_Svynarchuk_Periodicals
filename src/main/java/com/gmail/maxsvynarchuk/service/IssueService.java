@@ -26,7 +26,7 @@ public class IssueService {
     public boolean addIssueToPeriodical(Periodical periodical, PeriodicalIssue periodicalIssue) {
         log.debug("Attempt to add issue to periodical");
         boolean issueIsPresent = periodicalIssueDao.existByNumberAndPeriodical(
-                periodicalIssue.getIssueNo(),
+                periodicalIssue.getIssueNumber(),
                 periodical);
         if (!issueIsPresent) {
             periodicalIssue.setPeriodical(periodical);

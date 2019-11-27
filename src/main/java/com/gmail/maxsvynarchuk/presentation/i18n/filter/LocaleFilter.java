@@ -1,6 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.i18n.filter;
 
 import com.gmail.maxsvynarchuk.presentation.i18n.SupportedLocale;
+import com.gmail.maxsvynarchuk.presentation.util.Util;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -23,10 +24,9 @@ public class LocaleFilter implements Filter {
 
         if (req.getParameter(LANG) != null) {
             replaceUserLocale(req);
-            // TODO - check with servlet
-//            String referer = Util.getReferer(req);
-//            Util.redirectTo(req, res, referer);
-//            return;
+            String referer = Util.getReferer(req);
+            Util.redirectTo(req, res, referer);
+            return;
         }
 
         if (req.getSession().getAttribute(LOCALE) == null) {

@@ -39,7 +39,7 @@ public class ShoppingCart {
             BigDecimal monthAmount =
                     new BigDecimal(subscription.getSubscriptionPlan().getMonthsAmount());
             BigDecimal rate = subscription.getSubscriptionPlan().getRate();
-            BigDecimal price = subscription.getPeriodical().getPeriodicalPrice();
+            BigDecimal price = subscription.getPeriodical().getPrice();
             totalValue = totalValue.add(
                     price.multiply(
                             monthAmount.multiply(rate)));
@@ -69,11 +69,11 @@ public class ShoppingCart {
     }
 
     private long getCartItemId(Subscription subscription) {
-        return subscription.getPeriodical().getPeriodicalId();
+        return subscription.getPeriodical().getId();
     }
 
     private boolean isSuspendedPeriodical(Subscription subscription) {
-        return subscription.getPeriodical().getPeriodicalStatus() ==
+        return subscription.getPeriodical().getStatus() ==
                 PeriodicalStatus.SUSPENDED;
     }
 }

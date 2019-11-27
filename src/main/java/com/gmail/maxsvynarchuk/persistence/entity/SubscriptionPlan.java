@@ -7,11 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 
@@ -24,17 +20,20 @@ import javax.validation.constraints.NotNull;
 public class SubscriptionPlan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer subscriptionPlanId;
+    @Column(name = "subscription_plan_id")
+    private Integer id;
+
+    @Column(name = "plan_name")
+    @NotNull
+    private String name;
 
     @NotNull
-    private String planName;
-
-    @NotNull
-    private short monthsAmount;
+    private Integer monthsAmount;
 
     @Digits(integer=10, fraction = 2)
     @NotNull
     private BigDecimal rate;
 
-    private String planDescription;
+    @Column(name = "plan_description")
+    private String description;
 }

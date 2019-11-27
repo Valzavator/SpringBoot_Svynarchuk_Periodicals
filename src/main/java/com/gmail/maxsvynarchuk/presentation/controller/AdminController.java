@@ -1,94 +1,84 @@
 package com.gmail.maxsvynarchuk.presentation.controller;
 
+import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
+import com.gmail.maxsvynarchuk.presentation.util.Util;
+import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
+import com.gmail.maxsvynarchuk.presentation.util.validator.ValidatorManager;
+import com.gmail.maxsvynarchuk.service.PeriodicalService;
+import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import javax.validation.constraints.Min;
+import java.util.Objects;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/app/admin")
 @AllArgsConstructor
 @Log4j2
 public class AdminController {
+    private final PeriodicalService periodicalService;
 
-//    @GetMapping("/adminPage")
-//    public String adminPage() {
-//        log.info("Try to get admin page");
-//        return Path.ADMIN_PAGE;
-//    }
-//
-//    @GetMapping("/setGrade")
-//    public String setGradePage() {
-//        log.info("Try to get setGrade page");
-//        return Path.SET_GRADE_PAGE;
-//    }
-//
-//    @GetMapping("/sendNotification")
-//    public String sendNotificationPage() {
-//        log.info("Try to get sendNotification page");
-//        return Path.SEND_NOTIFICATION_PAGE;
-//    }
-//
-//    @PostMapping("/findUserSettingGrade")
-//    public String findUserSettingGrade(@RequestParam("first_name") String firstName,
-//                                       @RequestParam("second_name") String secondName,
-//                                       ModelMap model) {
-//        log.info("Try to find users for setting a grade");
-//        List<User> users = service.findUsers(firstName, secondName);
-//        if (users.isEmpty()) {
-//            log.info("There aren't any available users");
-//            model.addAttribute(AttributeNames.FIRST_NAME, firstName);
-//            model.addAttribute(AttributeNames.SECOND_NAME, secondName);
-//        } else {
-//            log.info("Users were successfully found");
-//            List<Subject> subjects = service.getAllSubjects();
-//            model.addAttribute(AttributeNames.SUBJECTS, subjects);
-//            model.addAttribute(AttributeNames.USERS, users);
-//        }
-//        return Path.SET_GRADE_PAGE;
-//    }
-//
-//    @PostMapping("/setGrade")
-//    public String settingGrade(@RequestParam("subject_id") Integer subjectId,
-//                               @RequestParam("user_id") Long userId,
-//                               @RequestParam("result") Integer result,
-//                               ModelMap model) {
-//        log.info("Start setting grade process");
-//        service.setGrade(userId, subjectId, result);
-//        model.addAttribute(AttributeNames.SUCCESS, "success");
-//        return Path.SET_GRADE_PAGE;
-//    }
-//
-//    @PostMapping("/findUserSendingNotification")
-//    public String findUserSendingNotification(@RequestParam("first_name") String firstName,
-//                                              @RequestParam("second_name") String secondName,
-//                                              ModelMap model) {
-//        log.info("Try to find users and for sending a notification");
-//        List<User> users = service.findUsers(firstName, secondName);
-//        if (users.isEmpty()) {
-//            log.info("There aren't any available users");
-//            model.addAttribute(AttributeNames.FIRST_NAME, firstName);
-//            model.addAttribute(AttributeNames.SECOND_NAME, secondName);
-//        } else {
-//            log.info("Users were successfully found");
-//            model.addAttribute(AttributeNames.USERS, users);
-//        }
-//        return Path.SEND_NOTIFICATION_PAGE;
-//    }
-//
-//    @PostMapping("/setUserStatus")
-//    public String sendingNotification(@RequestParam("user_id") Long userId,
-//                                      @RequestParam("userStatusId") Integer userStatusId,
-//                                      ModelMap model) {
-//        log.info("Start sending notification process");
-//        service.setUserStatus(userId, userStatusId);
-//        model.addAttribute(AttributeNames.SUCCESS, "success");
-//        return Path.SEND_NOTIFICATION_PAGE;
-//    }
+    @GetMapping("/catalog")
+    public String getAdminCatalogPage(
+            @RequestParam(value = "page", required = false, defaultValue = "0") Integer page,
+            Model model) {
+        log.info("Try to get admin catalog page");
+        Page<Periodical> periodicals = periodicalService.findAllPeriodicals(page,
+                Pagination.DEFAULT_RECORDS_PER_PAGE);
+        if (periodicals.getTotalPages() > 0) {
+            if (!periodicals.hasContent()) {
+                String path = Util.addParameterToURI(PagesPaths.ADMIN_CATALOG_PATH,
+                        RequestParameters.PAGINATION_PAGE,
+                        periodicals.getTotalPages() - 1);
+                return Util.redirectTo(path);
+            }
+            PageDTO<Periodical> pageDTO = new PageDTO<>(periodicals.getContent(),
+                    periodicals.getNumber(),
+                    periodicals.getTotalPages());
+            model.addAttribute(Attributes.PAGE_DTO, pageDTO);
+        }
+        return Views.ADMIN_CATALOG_VIEW;
+    }
+
+    @GetMapping("/catalog/periodical-create")
+    public String createPeriodicalPage(Model model) {
+        model.addAttribute(Attributes.PERIODICAL_TYPES,
+                periodicalService.findAllPeriodicalTypes());
+        model.addAttribute(Attributes.FREQUENCIES,
+                periodicalService.findAllFrequencies());
+        model.addAttribute(Attributes.PUBLISHERS,
+                periodicalService.findAllPublishers());
+
+        return Views.CREATE_PERIODICAL_VIEW;
+    }
+
+    @PostMapping("/catalog/change-status")
+    public String changePeriodicalStatus(@RequestParam @Min(value = 1) Long periodicalId,
+                                         @RequestParam PeriodicalStatus periodicalStatus,
+                                         @RequestHeader(value = "referer", required = false) String referer) {
+        log.info("Start the process of changing status of the periodical");
+        Optional<Periodical> periodicalOpt =
+                periodicalService.findPeriodicalById(periodicalId);
+
+        if (periodicalOpt.isPresent()) {
+            periodicalService.changeStatus(periodicalOpt.get(), periodicalStatus);
+            log.info("Status of the periodical was successfully changed");
+        } else {
+            log.debug("Periodical with id {} doesn't exist. " +
+                    "Changing status of the periodical failed", periodicalId);
+        }
+
+        String redirectPath = Objects.nonNull(referer)
+                ? referer
+                : PagesPaths.ADMIN_CATALOG_PATH;
+        return Util.redirectTo(redirectPath);
+    }
+
 }

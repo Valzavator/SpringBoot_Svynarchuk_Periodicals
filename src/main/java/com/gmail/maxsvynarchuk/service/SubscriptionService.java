@@ -65,10 +65,10 @@ public class SubscriptionService {
             for (Subscription subscription : subscriptions) {
                 Periodical periodical =
                         periodicalService.findPeriodicalById(
-                                subscription.getPeriodical().getPeriodicalId())
+                                subscription.getPeriodical().getId())
                                 .orElseThrow(() -> new ServiceException(
                                         "Subscription cannot refer to a non-existent periodical"));
-                if (periodical.getPeriodicalStatus() == PeriodicalStatus.SUSPENDED) {
+                if (periodical.getStatus() == PeriodicalStatus.SUSPENDED) {
                     throw new ServiceException("Can't subscribe to periodical with SUSPEND status");
                 }
 

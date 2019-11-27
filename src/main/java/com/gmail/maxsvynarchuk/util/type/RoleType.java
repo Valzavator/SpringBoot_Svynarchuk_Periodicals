@@ -16,11 +16,11 @@ public enum RoleType {
     }
 
     public Role getValue() {
-        return new Role(role.getRoleId(), role.getRoleName());
+        return new Role(role.getId(), role.getName());
     }
 
     public int getId() {
-        return role.getRoleId();
+        return role.getId();
     }
 
     public boolean isEquals(User user) {

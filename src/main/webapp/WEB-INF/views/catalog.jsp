@@ -9,14 +9,14 @@
 <body class="d-flex flex-column min-vh-100">
 <%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container">
-    <c:if test="${empty requestScope.catalog}">
+    <c:if test="${empty requestScope.pageDTO.elements}">
         <div class="d-flex justify-content-center align-items-center mb-5">
             <h1 class="display-4 text-info">
                 <span class="badge badge-info"><fmt:message key="catalog.empty"/></span>
             </h1>
         </div>
     </c:if>
-    <c:forEach var="periodical" items="${requestScope.catalog}">
+    <c:forEach var="periodical" items="${requestScope.pageDTO.elements}">
         <div class="card border-dark mb-5" id="periodical-${periodical.id}">
             <div class="row no-gutters ">
                 <div class="col-md-4 d-flex align-content-center flex-wrap">

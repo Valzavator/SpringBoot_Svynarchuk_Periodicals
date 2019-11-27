@@ -55,7 +55,7 @@ public class ShoppingCartService {
         for (Subscription subscription : shoppingCart.getItems()) {
             Optional<Periodical> periodicalOpt =
                     periodicalService.findPeriodicalById(
-                            subscription.getPeriodical().getPeriodicalId());
+                            subscription.getPeriodical().getId());
             if (periodicalOpt.isPresent()) {
                 subscription.setPeriodical(periodicalOpt.get());
                 shoppingCart.updateItem(subscription);

@@ -22,7 +22,9 @@ public class ErrorControllerImpl implements ErrorController {
             if (statusCode == HttpStatus.NOT_FOUND.value()) {
                 return Views.ERROR_404_VIEW;
             } else if (statusCode == HttpStatus.FORBIDDEN.value()) {
-                return Views.ERROR_GLOBAL_VIEW;
+                return Views.ERROR_403_VIEW;
+            } else if (statusCode == HttpStatus.BAD_REQUEST.value()) {
+                return Views.ERROR_400_VIEW;
             }
         }
 

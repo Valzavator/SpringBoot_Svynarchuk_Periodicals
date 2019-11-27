@@ -22,7 +22,7 @@ public class PeriodicalIssueDaoImpl implements PeriodicalIssueDao {
 
     @Override
     public boolean existByNumberAndPeriodical(String issueNumber, Periodical periodical) {
-        return repository.existsPeriodicalIssueByIssueNoAndPeriodical(issueNumber, periodical);
+        return repository.existsPeriodicalIssueByIssueNumberAndPeriodical(issueNumber, periodical);
     }
 
     @Override

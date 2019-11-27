@@ -10,6 +10,6 @@ public interface PeriodicalIssueRepository extends JpaRepository<PeriodicalIssue
 
     List<PeriodicalIssue> findByPeriodicalOrderByPublicationDate(Periodical periodical);
 
-    boolean existsPeriodicalIssueByIssueNoAndPeriodical(String issueNumber, Periodical periodical);
+    boolean existsPeriodicalIssueByIssueNumberAndPeriodical(String issueNumber, Periodical periodical);
 
 }
