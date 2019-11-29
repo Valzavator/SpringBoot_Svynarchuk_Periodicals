@@ -1,4 +1,4 @@
-package com.gmail.maxsvynarchuk.authorization;
+package com.gmail.maxsvynarchuk.presentation.controller;
 
 class PostSignInCommandTest {
 //    @InjectMocks
