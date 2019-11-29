@@ -2,7 +2,7 @@ package com.gmail.maxsvynarchuk.presentation.controller;
 
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
-import com.gmail.maxsvynarchuk.presentation.util.Util;
+import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
 import com.gmail.maxsvynarchuk.presentation.util.constants.*;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
@@ -61,7 +61,7 @@ public class UserController {
                         activeSubscriptions.getTotalPages() - 1);
                 redirectAttributes.addAttribute(RequestParameters.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
                         expiredPage);
-                return Util.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
+                return ControllerUtil.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
             }
             PageDTO<Subscription> activePageDTO = new PageDTO<>(activeSubscriptions.getContent(),
                     activeSubscriptions.getNumber(),
@@ -76,7 +76,7 @@ public class UserController {
                         activePage);
                 redirectAttributes.addAttribute(RequestParameters.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
                         expiredSubscriptions.getTotalPages() - 1);
-                return Util.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
+                return ControllerUtil.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
             }
             PageDTO<Subscription> expiredPageDTO = new PageDTO<>(expiredSubscriptions.getContent(),
                     expiredSubscriptions.getNumber(),

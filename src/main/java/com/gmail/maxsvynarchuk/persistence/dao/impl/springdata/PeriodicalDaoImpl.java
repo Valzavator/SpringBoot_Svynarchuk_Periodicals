@@ -4,10 +4,10 @@ import com.gmail.maxsvynarchuk.persistence.dao.PeriodicalDao;
 import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.repository.PeriodicalRepository;
 import com.gmail.maxsvynarchuk.util.type.PeriodicalStatus;
+import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import lombok.AllArgsConstructor;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,5 +50,10 @@ public class PeriodicalDaoImpl implements PeriodicalDao {
     @Override
     public void delete(Periodical obj) {
         repository.delete(obj);
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
     }
 }

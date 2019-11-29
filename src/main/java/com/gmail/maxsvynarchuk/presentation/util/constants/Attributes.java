@@ -23,6 +23,7 @@ public final class Attributes {
     public static final String PUBLISHERS = ResourceManager.ATTRIBUTE.getProperty("publishers");
 
     public static final String USER_DTO = ResourceManager.ATTRIBUTE.getProperty("user.dto");
+    public static final String SIGN_IN_DTO = ResourceManager.ATTRIBUTE.getProperty("sign.in.dto");
     public static final String PERIODICAL_DTO = ResourceManager.ATTRIBUTE.getProperty("periodical.dto");
     public static final String ISSUE_DTO = ResourceManager.ATTRIBUTE.getProperty("issue.dto");
     public static final String PAYMENT_DTO = ResourceManager.ATTRIBUTE.getProperty("payment.dto");

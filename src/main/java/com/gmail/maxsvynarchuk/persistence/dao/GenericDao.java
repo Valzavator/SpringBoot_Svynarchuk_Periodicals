@@ -47,4 +47,12 @@ public interface GenericDao<T, ID extends Serializable> {
      * @param obj user to delete.
      */
     void delete(T obj);
+
+    /**
+     * Check object's existing in database.
+     *
+     * @param id identifier of the object.
+     * @return {@code true} if exists else {@code false}
+     */
+    boolean exist(ID id);
 }

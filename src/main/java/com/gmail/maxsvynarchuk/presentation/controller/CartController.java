@@ -5,8 +5,10 @@ import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.exception.BadRequestException;
-import com.gmail.maxsvynarchuk.presentation.util.Util;
-import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
 import com.gmail.maxsvynarchuk.service.ShoppingCartService;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
@@ -19,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.constraints.Min;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -48,8 +49,8 @@ public class CartController {
 
     @PostMapping("/add")
     public String addItemToCart(
-            @RequestParam @Min(1) Long periodicalId,
-            @RequestParam @Min(1) Integer subscriptionPlanId,
+            @RequestParam Long periodicalId,
+            @RequestParam Integer subscriptionPlanId,
             @SessionAttribute("user") User user,
             @ModelAttribute("shoppingCart") ShoppingCart shoppingCart,
             @RequestHeader(value = "referer", required = false, defaultValue = "/app/catalog") String referer,
@@ -66,7 +67,7 @@ public class CartController {
                 periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
             redirectAttributes.addFlashAttribute(Attributes.ERROR_PERIODICAL_INVALID, true);
             log.debug("Invalid periodical with id {} for subscription", periodicalId);
-            return Util.redirectTo(referer);
+            return ControllerUtil.redirectTo(referer);
         }
 
         Periodical periodical = periodicalOpt.get();
@@ -75,7 +76,7 @@ public class CartController {
         if (isAlreadySubscribed) {
             redirectAttributes.addFlashAttribute(Attributes.ERROR_IS_ALREADY_SUBSCRIBED, true);
             log.debug("User is already subscribed to periodical with id {}", periodicalId);
-            return Util.redirectTo(referer);
+            return ControllerUtil.redirectTo(referer);
         }
 
         boolean isAddedToCart = shoppingCartService.addItemToCart(shoppingCart, user,
@@ -87,22 +88,22 @@ public class CartController {
             log.debug("Item successfully added to cart");
         }
 
-        return Util.redirectTo(referer);
+        return ControllerUtil.redirectTo(referer);
     }
 
     @PostMapping("/remove")
-    public String removeItemFromCart(@RequestParam @Min(1) Long cartItemId,
+    public String removeItemFromCart(@RequestParam Long cartItemId,
                                      @ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
         log.debug("Attempt to remove item from shopping cart");
         shoppingCartService.removeItemFromCart(shoppingCart, cartItemId);
-        return Util.redirectTo(PagesPaths.CART_PATH);
+        return ControllerUtil.redirectTo(PagesPaths.CART_PATH);
     }
 
     @PostMapping("/remove-all")
     public String removeAllItemsFromCart(@ModelAttribute("shoppingCart") ShoppingCart shoppingCart) {
         log.debug("Attempt to remove all items from shopping cart");
         shoppingCartService.removeAllItemFromCart(shoppingCart);
-        return Util.redirectTo(PagesPaths.CART_PATH);
+        return ControllerUtil.redirectTo(PagesPaths.CART_PATH);
     }
 
     @PostMapping("/subscription-payment")
@@ -118,11 +119,11 @@ public class CartController {
             subscriptionService.processSubscriptions(user, subscriptions, totalPrice);
         } catch (ServiceException exception) {
             log.error(exception.getMessage());
-            return Util.redirectTo(PagesPaths.CART_PATH);
+            return ControllerUtil.redirectTo(PagesPaths.CART_PATH);
         }
 
         shoppingCartService.removeAllItemFromCart(shoppingCart);
         log.debug("New subscriptions processed successfully");
-        return Util.redirectTo(PagesPaths.CART_PATH);
+        return ControllerUtil.redirectTo(PagesPaths.CART_PATH);
     }
 }

@@ -1,7 +1,7 @@
 package com.gmail.maxsvynarchuk.presentation.filter;
 
 
-import com.gmail.maxsvynarchuk.presentation.util.Util;
+import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
 
@@ -48,7 +48,7 @@ public class AuthenticationFilter implements Filter {
 
         if (isLoggedIn) {
             if (isSignUpRequest || isSignInRequest) {
-                Util.redirectTo(req, resp, PagesPaths.HOME_PATH);
+                ControllerUtil.redirectTo(req, resp, PagesPaths.HOME_PATH);
             } else {
                 chain.doFilter(request, response);
             }
@@ -56,7 +56,7 @@ public class AuthenticationFilter implements Filter {
             if (freePaths.contains(requestPath)) {
                 chain.doFilter(request, response);
             } else {
-                Util.redirectTo(req, resp, PagesPaths.SIGN_IN_PATH);
+                ControllerUtil.redirectTo(req, resp, PagesPaths.SIGN_IN_PATH);
             }
         }
     }

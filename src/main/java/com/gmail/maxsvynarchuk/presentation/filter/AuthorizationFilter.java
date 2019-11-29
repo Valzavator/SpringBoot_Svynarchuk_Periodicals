@@ -3,7 +3,6 @@ package com.gmail.maxsvynarchuk.presentation.filter;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
 import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
-import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.util.type.RoleType;
 
 import javax.servlet.*;
@@ -20,8 +19,6 @@ import java.util.Set;
  *
  * @author Maksym Svynarhchuk
  */
-//@Component
-//@Order(2)
 public class AuthorizationFilter implements Filter {
     private static final Set<String> secureAdminPaths = new HashSet<>();
     private static final Set<String> secureUserPaths = new HashSet<>();
@@ -48,43 +45,36 @@ public class AuthorizationFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
-        try {
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse resp = (HttpServletResponse) response;
+        HttpSession session = req.getSession(false);
 
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse resp = (HttpServletResponse) response;
-            HttpSession session = req.getSession(false);
+        User user = Objects.nonNull(session)
+                ? (User) session.getAttribute(Attributes.USER)
+                : null;
 
-            User user = Objects.nonNull(session)
-                    ? (User) session.getAttribute(Attributes.USER)
-                    : null;
+        boolean isUser = RoleType.USER.isEquals(user);
+        boolean isAdmin = RoleType.ADMIN.isEquals(user);
+        boolean isOnlyAdminRequest = secureAdminPaths.contains(req.getServletPath());
+        boolean isOnlyUserRequest = secureUserPaths.contains(req.getServletPath());
 
-            boolean isUser = RoleType.USER.isEquals(user);
-            boolean isAdmin = RoleType.ADMIN.isEquals(user);
-            boolean isOnlyAdminRequest = secureAdminPaths.contains(req.getServletPath());
-            boolean isOnlyUserRequest = secureUserPaths.contains(req.getServletPath());
-
-            if (isOnlyAdminRequest) {
-                doFilter(isAdmin, req, resp, chain);
-            } else if (isOnlyUserRequest) {
-                doFilter(isUser, req, resp, chain);
-            } else {
-                chain.doFilter(req, resp);
-            }
-        } catch (Throwable e) {
-            e.printStackTrace();
-            throw e;
+        if (isOnlyAdminRequest) {
+            doFilter(isAdmin, req, resp, chain);
+        } else if (isOnlyUserRequest) {
+            doFilter(isUser, req, resp, chain);
+        } else {
+            chain.doFilter(req, resp);
         }
     }
 
     private void doFilter(boolean isAuthorized,
-                          ServletRequest request,
-                          ServletResponse response,
+                          HttpServletRequest request,
+                          HttpServletResponse response,
                           FilterChain chain) throws IOException, ServletException {
         if (isAuthorized) {
             chain.doFilter(request, response);
         } else {
-            request.getRequestDispatcher(Views.ERROR_403_VIEW)
-                    .forward(request, response);
+            response.sendError(HttpServletResponse.SC_FORBIDDEN);
         }
     }
 }

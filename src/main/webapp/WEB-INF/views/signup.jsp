@@ -1,4 +1,6 @@
 <%--@elvariable id="errors" type="java.util.Map"--%>
+<%--@elvariable id="userDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.UserDTO"--%>
+<%--@elvariable id="errorRegistration" type="java.lang.Boolean"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
          import="com.gmail.maxsvynarchuk.util.type.Gender" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
@@ -26,15 +28,18 @@
                                     <i class="fa fa-envelope fa-lg" aria-hidden="true"></i>
                                 </span>
                             </div>
-                            <input type="email" id="email"
+                            <input type="email"
+                                   id="email"
                                    name="email"
-                                   value="<c:out value="${requestScope.userDTO.email}"/>"
+                                   value="<c:out value="${userDTO.email}"/>"
                                    class="form-control form-control-lg
-                                   <c:if test="${errors.errorEmail}">
+                                   <c:if test="${errors.emailError}">
                                             is-invalid
                                    </c:if>"
-                                   placeholder="<fmt:message key="email.placeholder"/>" required>
-                            <c:if test="${errors.errorEmail}">
+                                   placeholder="<fmt:message key="email.placeholder"/>"
+                                   maxlength="255"
+                                   required>
+                            <c:if test="${errors.emailError}">
                                 <div class="invalid-feedback">
                                     <fmt:message key="error.email"/>
                                 </div>
@@ -53,14 +58,16 @@
                                 </div>
                                 <input type="text" id="firstName"
                                        name="firstName"
-                                       value="<c:out value="${requestScope.userDTO.firstName}"/>"
+                                       value="<c:out value="${userDTO.firstName}"/>"
                                        class="form-control form-control-lg
-                                       <c:if test="${errors.errorFirstName}">
+                                       <c:if test="${errors.firstNameError}">
                                             is-invalid
                                        </c:if>"
                                        placeholder="<fmt:message key="firstname.placeholder"/>"
-                                       aria-describedby="inputGroupPrepend" required>
-                                <c:if test="${errors.errorFirstName}">
+                                       aria-describedby="inputGroupPrepend"
+                                       maxlength="255"
+                                       required>
+                                <c:if test="${errors.firstNameError}">
                                     <div class="invalid-feedback">
                                         <fmt:message key="error.firstname"/>
                                     </div>
@@ -78,14 +85,16 @@
                                 </div>
                                 <input type="text" id="lastName"
                                        name="lastName"
-                                       value="<c:out value="${requestScope.userDTO.lastName}"/>"
+                                       value="<c:out value="${userDTO.lastName}"/>"
                                        class="form-control form-control-lg
-                                       <c:if test="${errors.errorLastName}">
+                                       <c:if test="${errors.lastNameError}">
                                             is-invalid
                                        </c:if>"
                                        placeholder="<fmt:message key="lastname.placeholder"/>"
-                                       aria-describedby="inputGroupPrepend" required>
-                                <c:if test="${errors.errorLastName}">
+                                       maxlength="255"
+                                       aria-describedby="inputGroupPrepend"
+                                       required>
+                                <c:if test="${errors.lastNameError}">
                                     <div class="invalid-feedback">
                                         <fmt:message key="error.lastname"/>
                                     </div>
@@ -105,12 +114,15 @@
                             <input type="password" id="password"
                                    name="password"
                                    class="form-control form-control-lg
-                                   <c:if test="${errors.errorPassword}">
+                                   <c:if test="${errors.passwordError}">
                                             is-invalid
                                    </c:if>"
+
+                                   placeholder="<fmt:message key="password.placeholder"/>"
                                    minlength="5"
-                                   placeholder="<fmt:message key="password.placeholder"/>" required>
-                            <c:if test="${errors.errorPassword}">
+                                   maxlength="255"
+                                   required>
+                            <c:if test="${errors.passwordError}">
                                 <div class="invalid-feedback">
                                     <fmt:message key="error.password"/>
                                 </div>
@@ -131,14 +143,14 @@
                                         name="gender"
                                         class="form-control form-control-lg">
                                     <option value="MALE"
-                                            <c:if test="${requestScope.userDTO.gender eq Gender.MALE}">
+                                            <c:if test="${userDTO.gender eq Gender.MALE}">
                                                 selected
                                             </c:if>
                                     >
                                         <fmt:message key="gender.male"/>
                                     </option>
                                     <option value="FEMALE"
-                                            <c:if test="${requestScope.userDTO.gender eq Gender.FEMALE}">
+                                            <c:if test="${userDTO.gender eq Gender.FEMALE}">
                                                 selected
                                             </c:if>
                                     >
@@ -159,7 +171,7 @@
                                 </div>
                                 <input type="date" id="dateOfBirth"
                                        name="dateOfBirth"
-                                       value="<c:out value="${requestScope.userDTO.dateOfBirth}"/>"
+                                       value="<c:out value="${userDTO.dateOfBirth}"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="1900-01-01" required>
                             </div>
@@ -173,7 +185,7 @@
 
                 </form>
             </div>
-            <c:if test="${errors.errorRegistration}">
+            <c:if test="${errorRegistration}">
                 <div class="card-footer text-muted">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <fmt:message key="error.registration"/>

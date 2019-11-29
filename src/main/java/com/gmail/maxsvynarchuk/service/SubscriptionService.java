@@ -9,7 +9,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -50,7 +49,8 @@ public class SubscriptionService {
     @Transactional(readOnly = true)
     public List<Subscription> findAllSubscriptionsByPayment(Payment payment) {
         log.debug("Attempt to find all subscriptions by payment");
-        List<Subscription> subscriptions = subscriptionDao.findByPayment(payment);
+        List<Subscription> subscriptions = subscriptionDao.findByPayment(payment, Sort.by(
+                Sort.Order.asc("endDate")));
         if (subscriptions.size() > 0) {
             return subscriptions;
         } else {

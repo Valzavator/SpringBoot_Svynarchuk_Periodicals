@@ -1,5 +1,6 @@
 <%--@elvariable id="errors" type="java.util.Map"--%>
 <%--@elvariable id="errorAuthentication" type="java.lang.Boolean"--%>
+<%--@elvariable id="signInDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.SignInDTO"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 <html>
@@ -26,14 +27,16 @@
                             </div>
                             <input type="email" id="email"
                                    name="email"
-                                   value="<c:out value="${requestScope.userDTO.email}"/>"
+                                   value="<c:out value="${signInDTO.email}"/>"
                                    class="form-control form-control-lg
-                                   <c:if test="${errors.errorEmail}">
+                                   <c:if test="${errors.emailError}">
                                             is-invalid
                                    </c:if>"
                                    aria-describedby="emailHelp"
-                                   placeholder="<fmt:message key="email.placeholder"/>" required>
-                            <c:if test="${errors.errorEmail}">
+                                   placeholder="<fmt:message key="email.placeholder"/>"
+                                   maxlength="255"
+                                   required>
+                            <c:if test="${errors.emailError}">
                                 <div class="invalid-feedback">
                                     <fmt:message key="error.email"/>
                                 </div>
@@ -52,12 +55,14 @@
                             <input type="password" id="password"
                                    name="password"
                                    class="form-control form-control-lg
-                                   <c:if test="${errors.errorPassword}">
+                                   <c:if test="${errors.passwordError}">
                                             is-invalid
                                    </c:if>"
+                                   placeholder="<fmt:message key="password.placeholder"/>"
                                    minlength="5"
-                                   placeholder="<fmt:message key="password.placeholder"/>" required>
-                            <c:if test="${errors.errorPassword}">
+                                   maxlength="255"
+                                   required>
+                            <c:if test="${errors.passwordError}">
                                 <div class="invalid-feedback">
                                     <fmt:message key="error.password"/>
                                 </div>
@@ -71,7 +76,7 @@
                 </form>
             </div>
 
-            <c:if test="${errors.errorAuthentication}">
+            <c:if test="${errorAuthentication}">
                 <div class="card-footer text-muted">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <fmt:message key="error.authentication"/>

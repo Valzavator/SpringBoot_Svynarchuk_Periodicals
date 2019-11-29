@@ -38,4 +38,9 @@ public class PublisherDaoImpl implements PublisherDao {
     public void delete(Publisher obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
+    }
 }

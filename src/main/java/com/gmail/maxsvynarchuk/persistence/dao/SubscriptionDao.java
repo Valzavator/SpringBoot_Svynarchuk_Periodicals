@@ -6,6 +6,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -36,6 +37,6 @@ public interface SubscriptionDao extends GenericDao<Subscription, Long> {
      * @param payment payment
      * @return list of retrieved subscriptions
      */
-    List<Subscription> findByPayment(Payment payment);
+    List<Subscription> findByPayment(Payment payment, Sort sort);
 
 }

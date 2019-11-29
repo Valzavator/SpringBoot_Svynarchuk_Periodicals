@@ -49,4 +49,9 @@ public class PeriodicalIssueDaoImpl implements PeriodicalIssueDao {
     public void delete(PeriodicalIssue obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
+    }
 }

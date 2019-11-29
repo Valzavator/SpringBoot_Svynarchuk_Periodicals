@@ -9,6 +9,7 @@ import com.gmail.maxsvynarchuk.persistence.repository.SubscriptionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -37,8 +38,8 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     }
 
     @Override
-    public List<Subscription> findByPayment(Payment payment) {
-        return repository.findByPaymentOrderByEndDateAsc(payment);
+    public List<Subscription> findByPayment(Payment payment, Sort sort) {
+        return repository.findByPayment(payment);
     }
 
     @Override
@@ -64,5 +65,10 @@ public class SubscriptionDaoImpl implements SubscriptionDao {
     @Override
     public void delete(Subscription obj) {
         repository.delete(obj);
+    }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
     }
 }

@@ -1,3 +1,4 @@
+<%--@elvariable id="periodicalDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.PeriodicalDTO"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
@@ -16,7 +17,8 @@
             <div class="card-body mx-auto w-100">
 
                 <form accept-charset="UTF-8" role="form" method="post">
-                    <input type="hidden" name="periodicalId" value="${requestScope.periodicalDTO.id}"/>
+                    <input type="hidden" name="id" value="${periodicalDTO.id}"/>
+                    <input type="hidden" name="status" value="${periodicalDTO.status}"/>
 
                     <%@ include file="/WEB-INF/views/snippets/periodicalFormFields.jsp" %>
 

@@ -38,4 +38,9 @@ public class FrequencyDaoImpl implements FrequencyDao {
     public void delete(Frequency obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Integer id) {
+        return repository.existsById(id);
+    }
 }

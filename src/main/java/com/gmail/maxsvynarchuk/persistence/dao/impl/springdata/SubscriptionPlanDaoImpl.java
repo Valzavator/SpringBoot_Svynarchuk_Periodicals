@@ -38,4 +38,9 @@ public class SubscriptionPlanDaoImpl implements SubscriptionPlanDao {
     public void delete(SubscriptionPlan obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Integer id) {
+        return repository.existsById(id);
+    }
 }

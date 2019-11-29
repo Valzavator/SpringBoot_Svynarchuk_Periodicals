@@ -45,4 +45,9 @@ public class PaymentDaoImpl implements PaymentDao {
     public void delete(Payment obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
+    }
 }

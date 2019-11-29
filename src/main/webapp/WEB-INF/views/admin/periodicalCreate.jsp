@@ -16,8 +16,6 @@
             <div class="card-body mx-auto w-100">
 
                 <form accept-charset="UTF-8" role="form" method="post">
-                    <input type="hidden" name="periodicalId" value="${requestScope.periodicalDTO.id}"/>
-
                     <%@ include file="/WEB-INF/views/snippets/periodicalFormFields.jsp" %>
 
                     <div class="form-group text-center">

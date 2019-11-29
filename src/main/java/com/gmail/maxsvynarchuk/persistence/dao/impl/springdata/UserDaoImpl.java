@@ -48,4 +48,9 @@ public class UserDaoImpl implements UserDao {
     public void delete(User obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Long id) {
+        return repository.existsById(id);
+    }
 }

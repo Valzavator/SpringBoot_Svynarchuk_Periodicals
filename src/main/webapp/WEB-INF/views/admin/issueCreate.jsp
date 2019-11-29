@@ -1,3 +1,7 @@
+<%--@elvariable id="errors" type="java.util.Map"--%>
+<%--@elvariable id="errorIssueExist" type="java.lang.Boolean"--%>
+<%--@elvariable id="issueDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.PeriodicalIssueDTO"--%>
+<%--@elvariable id="periodicalDTO" type="com.gmail.maxsvynarchuk.presentation.util.dto.PeriodicalDTO"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
@@ -16,7 +20,7 @@
             <div class="card-body mx-auto w-100">
 
                 <form accept-charset="UTF-8" role="form" method="post">
-                    <input type="hidden" name="periodicalId" value="${requestScope.periodicalDTO.id}"/>
+                    <input type="hidden" name="periodicalId" value="${periodicalDTO.id}"/>
 
                     <div class="form-group">
                         <label for="name">
@@ -29,15 +33,15 @@
                                 </span>
                             </div>
                             <input type="text" id="name"
-                                   name="issueName"
-                                   value="<c:out value="${requestScope.issueDTO.name}"/>"
+                                   name="name"
+                                   value="<c:out value="${issueDTO.name}"/>"
                                    class="form-control form-control-lg
-                                   <c:if test="${errors.errorIssueName}">
+                                   <c:if test="${errors.nameError}">
                                             is-invalid
                                    </c:if>"
                                    placeholder="<fmt:message key="create.issue.name.placeholder"/>"
                                    required>
-                            <c:if test="${errors.errorIssueName}">
+                            <c:if test="${errors.nameError}">
                                 <div class="invalid-feedback">
                                     <fmt:message key="error.issue.name"/>
                                 </div>
@@ -60,15 +64,15 @@
                                 </div>
                                 <input type="text" id="number"
                                        name="issueNumber"
-                                       value="<c:out value="${requestScope.issueDTO.issueNumber}"/>"
+                                       value="<c:out value="${issueDTO.issueNumber}"/>"
                                        class="form-control form-control-lg
-                                   <c:if test="${errors.errorIssueNumber}">
+                                   <c:if test="${errors.issueNumberError}">
                                             is-invalid
                                    </c:if>"
                                        placeholder="<fmt:message key="create.issue.number.placeholder"/>"
                                        maxlength="10"
                                        required>
-                                <c:if test="${errors.errorIssueNumber}">
+                                <c:if test="${errors.issueNumberError}">
                                     <div class="invalid-feedback">
                                         <fmt:message key="error.issue.number"/>
                                     </div>
@@ -87,7 +91,7 @@
                                 </div>
                                 <input type="date" id="publicationDate"
                                        name="publicationDate"
-                                       value="<c:out value="${requestScope.issueDTO.publicationDate}"/>"
+                                       value="<c:out value="${issueDTO.publicationDate}"/>"
                                        class="form-control form-control-lg"
                                        max="3000-12-31" min="2019-01-01" required>
                             </div>
@@ -100,15 +104,15 @@
                             <fmt:message key="issue.description"/>
                         </label>
                         <textarea id="description"
-                                  name="issueDescription"
+                                  name="description"
                                   class="form-control
-                                  <c:if test="${errors.errorIssueDescription}">
+                                  <c:if test="${errors.issueDescriptionError}">
                                             is-invalid
                                   </c:if>"
                                   placeholder="<fmt:message key="create.issue.description.placeholder"/>"
                                   rows="5"
-                                  required><c:out value="${requestScope.issueDTO.description}"/></textarea>
-                        <c:if test="${errors.errorIssueDescription}">
+                                  required><c:out value="${issueDTO.description}"/></textarea>
+                        <c:if test="${errors.issueDescriptionError}">
                             <div class="invalid-feedback">
                                 <fmt:message key="error.issue.description"/>
                             </div>
@@ -125,7 +129,7 @@
 
             </div>
 
-            <c:if test="${errors.errorIssueExist}">
+            <c:if test="${errorIssueExist}">
                 <div class="card-footer text-muted">
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <fmt:message key="error.issue.exist"/>

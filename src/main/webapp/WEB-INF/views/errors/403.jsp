@@ -6,7 +6,7 @@
     <%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
     <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/error.css"/>">
 </head>
-<body class="d-flex flex-column min-vh-100">
+<body class="d-flex flex-column h-100">
 <%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
 <main role="main" class="container h-100">
     <div class="row h-100 justify-content-md-center align-items-center">

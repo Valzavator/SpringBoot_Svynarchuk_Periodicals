@@ -4,7 +4,7 @@ import com.gmail.maxsvynarchuk.persistence.entity.Periodical;
 import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
-import com.gmail.maxsvynarchuk.presentation.util.Util;
+import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
 import com.gmail.maxsvynarchuk.presentation.util.constants.*;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
 import com.gmail.maxsvynarchuk.service.IssueService;
@@ -16,17 +16,16 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping("/app")
-@Validated
 @AllArgsConstructor
 @Log4j2
 public class PeriodicalController {
@@ -49,7 +48,7 @@ public class PeriodicalController {
             if (!periodicals.hasContent()) {
                 redirectAttributes.addAttribute(RequestParameters.PAGINATION_PAGE,
                         periodicals.getTotalPages() - 1);
-                return Util.redirectTo(PagesPaths.CATALOG_PATH);
+                return ControllerUtil.redirectTo(PagesPaths.CATALOG_PATH);
             }
 
             List<SubscriptionPlan> subscriptionPlans =
@@ -64,7 +63,7 @@ public class PeriodicalController {
     }
 
     @GetMapping("/periodical")
-    public String getPeriodicalPage(@RequestParam @Min(1) Long periodicalId,
+    public String getPeriodicalPage(@RequestParam Long periodicalId,
                                     Model model) {
         log.debug("Attempt to get page for overview periodical");
         Optional<Periodical> periodicalOpt =

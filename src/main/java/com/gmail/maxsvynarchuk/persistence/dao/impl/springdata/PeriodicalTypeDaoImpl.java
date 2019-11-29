@@ -38,4 +38,9 @@ public class PeriodicalTypeDaoImpl implements PeriodicalTypeDao {
     public void delete(PeriodicalType obj) {
         repository.delete(obj);
     }
+
+    @Override
+    public boolean exist(Integer id) {
+        return repository.existsById(id);
+    }
 }

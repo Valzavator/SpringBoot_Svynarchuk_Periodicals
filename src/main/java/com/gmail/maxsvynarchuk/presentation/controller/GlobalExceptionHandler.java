@@ -36,8 +36,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Throwable.class)
     public void handleThrowable(Throwable throwable, HttpServletResponse response)
             throws IOException {
-        //TODO delete stackTrace
-        throwable.printStackTrace();
         log.error(throwable.toString());
         response.sendError(HttpStatus.INTERNAL_SERVER_ERROR.value());
     }
