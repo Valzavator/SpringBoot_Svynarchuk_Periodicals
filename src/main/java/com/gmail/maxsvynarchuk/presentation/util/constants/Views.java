@@ -6,6 +6,9 @@ import com.gmail.maxsvynarchuk.util.ResourceManager;
  * Path to jsp
  */
 public final class Views {
+    public static final String PREFIX = ResourceManager.VIEW.getProperty("view.prefix");
+    public static final String SUFFIX = ResourceManager.VIEW.getProperty("view.suffix");
+
     public static final String HOME_VIEW = ResourceManager.VIEW.getProperty("view.home");
     public static final String SIGN_IN_VIEW = ResourceManager.VIEW.getProperty("view.signin");
     public static final String SIGN_UP_VIEW = ResourceManager.VIEW.getProperty("view.signup");

@@ -4,10 +4,9 @@ import com.gmail.maxsvynarchuk.util.PasswordManager;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class ModelConfig implements WebMvcConfigurer {
+public class ModelConfig {
     @Bean
     public PasswordManager passwordManager() {
         return new PasswordManager();

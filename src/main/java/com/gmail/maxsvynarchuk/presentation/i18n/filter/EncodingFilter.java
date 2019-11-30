@@ -3,6 +3,7 @@ package com.gmail.maxsvynarchuk.presentation.i18n.filter;
 
 import javax.servlet.*;
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * The filter allows to set request and response encoding.
@@ -33,7 +34,7 @@ public class EncodingFilter implements Filter {
             throws IOException, ServletException {
         String codeRequest = request.getCharacterEncoding();
 
-        if (!encoding.equalsIgnoreCase(codeRequest)) {
+        if (Objects.nonNull(encoding) && !encoding.equalsIgnoreCase(codeRequest)) {
             request.setCharacterEncoding(encoding);
             response.setCharacterEncoding(encoding);
         }
