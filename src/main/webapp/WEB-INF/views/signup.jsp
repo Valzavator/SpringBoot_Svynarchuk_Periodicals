@@ -201,12 +201,3 @@
 <%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </body>
 </html>
-
-<%@ include file="/WEB-INF/views/snippets/header.jsp" %>
-<%@ include file="/WEB-INF/views/snippets/stylesheets.jsp" %>
-<%@ include file="/WEB-INF/views/snippets/navbar.jsp" %>
-<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
-
-<%@ include file="/WEB-INF/views/snippets/pagination.jsp" %>
-
-<%@ include file="/WEB-INF/views/snippets/periodicalFormFields.jsp" %>

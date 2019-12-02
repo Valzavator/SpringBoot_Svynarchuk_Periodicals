@@ -1,6 +1,6 @@
-<%--@elvariable id="periodical" type="com.gmail.maxsvynarchuk.persistence.entity.Periodical"--%>
+<%--@elvariable id="userDTO" type="com.gmail.maxsvynarchuk.persistence.entity.User"--%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
-         import="com.gmail.maxsvynarchuk.util.type.PeriodicalStatus, com.gmail.maxsvynarchuk.util.type.Gender" %>
+         import="com.gmail.maxsvynarchuk.util.type.Gender" %>
 <%@ include file="/WEB-INF/views/snippets/header.jsp" %>
 
 <html>
@@ -15,10 +15,10 @@
             <div class="row no-gutters ">
                 <div class="col-md-4 d-flex align-content-center flex-wrap">
                     <c:choose>
-                        <c:when test="${requestScope.userDTO.gender eq Gender.MALE}">
+                        <c:when test="${userDTO.gender eq Gender.MALE}">
                             <img src="<c:url value="/resources/images/male.png"/>" class="card-img" alt="user-logo">
                         </c:when>
-                        <c:when test="${requestScope.userDTO.gender eq Gender.FEMALE}">
+                        <c:when test="${userDTO.gender eq Gender.FEMALE}">
                             <img src="<c:url value="/resources/images/female.png"/>" class="card-img" alt="user-logo">
                         </c:when>
                         <c:otherwise>
@@ -29,8 +29,8 @@
                 <div class="col-md-8 text-white bg-primary">
                     <div class="card-header card-title text-center">
                         <h3>
-                            <c:out value="${requestScope.userDTO.firstName}"/>
-                            <c:out value="${requestScope.userDTO.lastName}"/>
+                            <c:out value="${userDTO.firstName}"/>
+                            <c:out value="${userDTO.lastName}"/>
                         </h3>
                     </div>
                     <ul class="bg-primary text-white list-group list-group-flush">
@@ -39,7 +39,7 @@
                                 <dt class="col-sm-3"><fmt:message key="role"/>:</dt>
                                 <dd class="col-sm-9">
                                      <span class="badge badge-success">
-                                        <c:out value="${requestScope.userDTO.role.name}"/>
+                                        <c:out value="${userDTO.role.name}"/>
                                     </span>
                                 </dd>
                             </dl>
@@ -48,7 +48,7 @@
                             <dl class="row">
                                 <dt class="col-sm-3"><fmt:message key="email"/>:</dt>
                                 <dd class="col-sm-9">
-                                    <c:out value="${requestScope.userDTO.email}"/>
+                                    <c:out value="${userDTO.email}"/>
                                 </dd>
                             </dl>
                         </li>
@@ -56,7 +56,7 @@
                             <dl class="row">
                                 <dt class="col-sm-3"><fmt:message key="dateofbirth"/>:</dt>
                                 <dd class="col-sm-9">
-                                    <c:out value="${requestScope.userDTO.dateOfBirth}"/>
+                                    <c:out value="${userDTO.dateOfBirth}"/>
                                 </dd>
                             </dl>
                         </li>
@@ -65,7 +65,7 @@
                                 <dt class="col-sm-3"><fmt:message key="gender"/>:</dt>
                                 <dd class="col-sm-9">
                                     <span class="badge badge-success">
-                                        <c:out value="${requestScope.userDTO.gender}"/>
+                                        <c:out value="${userDTO.gender}"/>
                                     </span>
                                 </dd>
                             </dl>
@@ -76,10 +76,9 @@
         </div>
     </div>
 
-    <%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 </main>
 
-<%@ include file="/WEB-INF/views/snippets/pagination.jsp" %>
+<%@ include file="/WEB-INF/views/snippets/footer.jsp" %>
 
 </body>
 </html>

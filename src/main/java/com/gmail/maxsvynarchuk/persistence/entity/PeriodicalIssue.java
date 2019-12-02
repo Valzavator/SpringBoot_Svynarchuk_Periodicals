@@ -6,10 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
-import java.time.LocalDate;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "periodical_issues")
@@ -38,7 +38,7 @@ public class PeriodicalIssue implements Serializable {
     @Column(name = "issues_description")
     private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "periodical_id")
     @NotNull
     private Periodical periodical;

@@ -5,7 +5,10 @@ import com.gmail.maxsvynarchuk.persistence.entity.PeriodicalIssue;
 import com.gmail.maxsvynarchuk.persistence.entity.SubscriptionPlan;
 import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
-import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Pagination;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
 import com.gmail.maxsvynarchuk.service.IssueService;
 import com.gmail.maxsvynarchuk.service.PeriodicalService;
@@ -46,7 +49,7 @@ public class PeriodicalController {
 
         if (periodicals.getTotalPages() > 0) {
             if (!periodicals.hasContent()) {
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_PAGE,
+                redirectAttributes.addAttribute(Attributes.PAGINATION_PAGE,
                         periodicals.getTotalPages() - 1);
                 return ControllerUtil.redirectTo(PagesPaths.CATALOG_PATH);
             }

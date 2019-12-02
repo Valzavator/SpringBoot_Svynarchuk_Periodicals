@@ -4,7 +4,10 @@ import com.gmail.maxsvynarchuk.persistence.entity.*;
 import com.gmail.maxsvynarchuk.presentation.exception.BadRequestException;
 import com.gmail.maxsvynarchuk.presentation.exception.NotFoundException;
 import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
-import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Pagination;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PeriodicalDTO;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PeriodicalIssueDTO;
@@ -49,7 +52,7 @@ public class AdminController {
                 Pagination.TEN_RECORDS_PER_PAGE);
         if (periodicals.getTotalPages() > 0) {
             if (!periodicals.hasContent()) {
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_PAGE,
+                redirectAttributes.addAttribute(Attributes.PAGINATION_PAGE,
                         periodicals.getTotalPages() - 1);
                 return ControllerUtil.redirectTo(PagesPaths.ADMIN_CATALOG_PATH);
             }
@@ -147,12 +150,19 @@ public class AdminController {
             Map<String, Boolean> errors = ControllerUtil.getErrors(bindingResult);
             redirectAttributes.addFlashAttribute(Attributes.ERRORS, errors);
             redirectAttributes.addFlashAttribute(Attributes.PERIODICAL_DTO, periodicalDTO);
-            redirectAttributes.addAttribute(RequestParameters.PERIODICAL_ID, periodicalDTO.getId());
             log.debug("Periodical editing fail");
             return ControllerUtil.redirectTo(referer);
         }
 
         Periodical periodical = mapper.map(periodicalDTO, Periodical.class);
+        Optional<Periodical> periodicalOpt =
+                periodicalService.findPeriodicalById(periodical.getId());
+        if (!periodicalOpt.isPresent() ||
+                periodicalOpt.get().getStatus() == PeriodicalStatus.SUSPENDED) {
+            log.debug("Periodical with id {} doesn't exist or has suspend status",
+                    periodical.getId());
+            throw new BadRequestException();
+        }
         try {
             periodicalService.updatePeriodical(periodical);
         } catch (ServiceException e) {
@@ -252,7 +262,7 @@ public class AdminController {
                 Pagination.TEN_RECORDS_PER_PAGE);
         if (payments.getTotalPages() > 0) {
             if (!payments.hasContent()) {
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_PAGE,
+                redirectAttributes.addAttribute(Attributes.PAGINATION_PAGE,
                         payments.getTotalPages() - 1);
                 return ControllerUtil.redirectTo(PagesPaths.PAYMENTS_PATH);
             }

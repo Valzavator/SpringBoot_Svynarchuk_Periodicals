@@ -3,7 +3,10 @@ package com.gmail.maxsvynarchuk.presentation.controller;
 import com.gmail.maxsvynarchuk.persistence.entity.Subscription;
 import com.gmail.maxsvynarchuk.persistence.entity.User;
 import com.gmail.maxsvynarchuk.presentation.util.ControllerUtil;
-import com.gmail.maxsvynarchuk.presentation.util.constants.*;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Attributes;
+import com.gmail.maxsvynarchuk.presentation.util.constants.PagesPaths;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Pagination;
+import com.gmail.maxsvynarchuk.presentation.util.constants.Views;
 import com.gmail.maxsvynarchuk.presentation.util.dto.PageDTO;
 import com.gmail.maxsvynarchuk.service.SubscriptionService;
 import lombok.AllArgsConstructor;
@@ -28,6 +31,7 @@ public class UserController {
 
     @GetMapping("/profile")
     public String getProfile() {
+        log.debug("Attempt to get profile page");
         return Views.PROFILE_VIEW;
     }
 
@@ -55,11 +59,11 @@ public class UserController {
                         Pagination.FIVE_RECORDS_PER_PAGE);
         if (activeSubscriptions.getTotalPages() > 0) {
             if (!activeSubscriptions.hasContent()) {
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_PILL,
-                        pill);
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE,
+                redirectAttributes.addAttribute(
+                        Attributes.PAGINATION_PILL, pill);
+                redirectAttributes.addAttribute(Attributes.PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE,
                         activeSubscriptions.getTotalPages() - 1);
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
+                redirectAttributes.addAttribute(Attributes.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
                         expiredPage);
                 return ControllerUtil.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
             }
@@ -70,11 +74,11 @@ public class UserController {
         }
         if (expiredSubscriptions.getTotalPages() > 0) {
             if (!expiredSubscriptions.hasContent()) {
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_PILL,
-                        pill);
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE,
-                        activePage);
-                redirectAttributes.addAttribute(RequestParameters.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
+                redirectAttributes.addAttribute(
+                        Attributes.PAGINATION_PILL, pill);
+                redirectAttributes.addAttribute(
+                        Attributes.PAGINATION_ACTIVE_SUBSCRIPTIONS_PAGE, activePage);
+                redirectAttributes.addAttribute(Attributes.PAGINATION_EXPIRED_SUBSCRIPTIONS_PAGE,
                         expiredSubscriptions.getTotalPages() - 1);
                 return ControllerUtil.redirectTo(PagesPaths.SUBSCRIPTIONS_PATH);
             }
