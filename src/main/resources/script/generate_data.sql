@@ -37,7 +37,7 @@ VALUES (1, 6, 2, 'Scientific American', 6,
        (1, 4, 1, 'Batman', 3,
         'Batman is an ongoing American comic book series featuring the DC Comics superhero Batman as its main protagonist. The character first appeared in Detective Comics #27 (cover dated May 1939). Batman proved to be so popular that a self-titled ongoing comic book series began publication with a cover date of Spring 1940. It was first advertised in early April 1940, one month after the first appearance of his new sidekick, Robin, the Boy Wonder. Batman comics have proven to be popular since the 1940s.');
 
-INSERT INTO periodical_issues(periodical_issue_id, periodical_id, issues_name, issue_no, publication_date,
+INSERT INTO periodical_issues(periodical_issue_id, periodical_id, issue_name, issue_no, publication_date,
                               issues_description)
 VALUES (1, 11, 'I AM GOTHAM Chapter One', 'BATMAN #1', '2019-06-15',
         'No one has ever stopped the Caped Crusader. Not The Joker. Not Two-Face. Not even the entire Justice League. But how does Batman confront a new hero who wants to save the city from the Dark Knight? CANT MISS: Superstar artist David Finch returns to the Dark Knight alongside writer Tom King for this five-part storyline.'),

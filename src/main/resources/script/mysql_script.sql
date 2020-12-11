@@ -12,6 +12,8 @@ DROP TABLE IF EXISTS users;
 
 DROP TABLE IF EXISTS roles;
 
+DROP TABLE IF EXISTS addresses;
+
 DROP TABLE IF EXISTS periodical_issues;
 
 DROP TABLE IF EXISTS periodicals;
@@ -33,12 +35,27 @@ CREATE TABLE roles
 );
 
 /*==============================================================*/
+/* Table: addresses                                             */
+/*==============================================================*/
+CREATE TABLE addresses
+(
+    address_id   BIGINT       NOT NULL AUTO_INCREMENT,
+    region       VARCHAR(255) NOT NULL,
+    city         VARCHAR(255) NOT NULL,
+    street       VARCHAR(255) NOT NULL,
+    building_no  VARCHAR(255) NOT NULL,
+    postal_index VARCHAR(255) NOT NULL UNIQUE,
+    PRIMARY KEY (address_id)
+);
+
+/*==============================================================*/
 /* Table: users                                                 */
 /*==============================================================*/
 CREATE TABLE users
 (
     user_id       BIGINT                  NOT NULL AUTO_INCREMENT,
     role_id       INT                     NOT NULL,
+    address_id    BIGINT                          ,
     first_name    VARCHAR(255)            NOT NULL,
     last_name     VARCHAR(255)            NOT NULL,
     email         VARCHAR(255)            NOT NULL UNIQUE,
@@ -48,6 +65,10 @@ CREATE TABLE users
     PRIMARY KEY (user_id),
     CONSTRAINT fk_user_role
         FOREIGN KEY (role_id) REFERENCES roles (role_id)
+            ON UPDATE RESTRICT
+            ON DELETE RESTRICT,
+    CONSTRAINT fk_user_address
+        FOREIGN KEY (address_id) REFERENCES addresses (address_id)
             ON UPDATE RESTRICT
             ON DELETE RESTRICT
 );
@@ -151,7 +172,7 @@ CREATE TABLE periodical_issues
 (
     periodical_issue_id BIGINT       NOT NULL AUTO_INCREMENT,
     periodical_id        BIGINT       NOT NULL,
-    issues_name          VARCHAR(255) NOT NULL,
+    issue_name          VARCHAR(255) NOT NULL,
     issue_no             VARCHAR(10)  NOT NULL,
     publication_date     DATE         NOT NULL,
     issues_description   VARCHAR(1000),

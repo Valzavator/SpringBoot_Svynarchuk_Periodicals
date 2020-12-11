@@ -50,6 +50,11 @@ public class User implements Serializable {
     @NotNull
     private Role role;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "address_id")
+    @NotNull
+    private Address address;
+
     public boolean isAdmin() {
         return RoleType.ADMIN.getValue().equals(role);
     }
